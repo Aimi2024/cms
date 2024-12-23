@@ -9,3 +9,13 @@ Route::get('/dashboard', function () {
 Route::get('/medicine', function () {
     return view(view: 'medicine');
 });
+
+
+Route::get('/equipments', function () {
+    return view(view: 'equipments');
+});
+
+
+Route::get('/accounts', function () {
+    return view(view: 'accounts');
+});
