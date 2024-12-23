@@ -14,7 +14,7 @@
             </div>
 
             <select class="bg-transparent outline-none border border-[#707070] rounded-lg bg-white py-1 px-2">
-                <option value="volvo" hidden>Type of Medicine</option>
+                <option value="volvo" hidden>TYPE OF MEDICINE</option>
                 <option value="saab">Lorem</option>
                 <option value="opel">Lorem</option>
                 <option value="audi">Lorem</option>
