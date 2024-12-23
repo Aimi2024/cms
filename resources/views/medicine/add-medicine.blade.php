@@ -14,48 +14,32 @@
                             class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
                     </div>
                     <div class="flex flex-col">
-                        <label for="Arrived" class="font-bold">Product Date Arrived</label>
-                        <div id="Arrived"
-                            class="flex items-center gap-3 w-fit bg-white border border-[#707070] py-1 px-2 rounded-lg">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                            </svg>
-                            <input id="datepicker-arrived" datepicker type="text" class="outline-none px-3 py-1"
-                                placeholder="Select date">
-                        </div>
+                        <label for="arrived" class="font-bold">Product Date Arrived</label>
+                        <input id="arrived" name="m_da" type="date"
+                            class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
                     </div>
                 </div>
 
                 <div class="flex flex-col gap-10">
                     <div class="flex flex-col">
-                        <label for="Stock" class="font-bold">Product Stock</label>
-                        <input id="Stock" name="m_stock" type="text"
+                        <label for="stock" class="font-bold">Product Stock</label>
+                        <input id="stock" name="m_stock" type="number"
                             class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
                     </div>
                     <div class="flex flex-col">
-                        <label for="Expired" class="font-bold">Product Date Expired</label>
-                        <div id="Expired"
-                            class="flex items-center gap-3 w-fit bg-white border border-[#707070] py-1 px-2 rounded-lg">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                            </svg>
-                            <input id="datepicker-expired" datepicker type="text" class="outline-none px-3 py-1"
-                                placeholder="Select date">
-                        </div>
+                        <label for="expired" class="font-bold">Product Date Expired</label>
+                        <input id="expired" name="m_date_expired" type="date"
+                            class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
                     </div>
                     <div class="flex flex-row gap-5">
-                        <a href="{{route ('medicine.index')}}"
-                            class="border border-[#707070] p-2 w-full bg-white text-center rounded-lg">No</a>
-                        <button class="bg-[#FD7E14] p-2 w-full text-white rounded-lg">Add Medicine</button>
+                        <a href="{{ route('medicine.index') }}"
+                            class="border border-[#707070] text-xs p-2 w-full bg-white text-center rounded-lg hover:bg-[#FD7E14] hover:text-white hover:border-none">No</a>
+                        <button
+                            class="bg-[#FD7E14] text-xs p-2 w-full text-white rounded-lg hover:border hover:border-[#707070] hover:bg-white hover:text-black">Add
+                            Medicine</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
-
 </x-layout>

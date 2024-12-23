@@ -53,10 +53,11 @@
                     <td>{{ $medicine->m_da }}</td> <!-- Display date added -->
                     <td>{{ $medicine->m_stock }}</td> <!-- Display stock quantity -->
                     <td>{{ $medicine->m_date_expired }}</td> <!-- Display expiration date -->
-                    <td>
-                        <!-- Add action buttons like Edit or Delete -->
-                        <!-- {{-- <a href="{{ route('medicine.edit', $medicine->id) }}">Edit</a> |
-            <a href="{{ route('medicine.delete', $medicine->id) }}">Delete</a> --}} -->
+                    <td class="relative">
+                        <a href="{{ route('medicine.deduct', $medicine->id) }}">
+                            <x-mdi-minus-box-outline class="text-red-400 w-7 h-7 absolute inset-0 m-auto" />
+                        </a>
+
                     </td>
                 </tr>
                 @endforeach
