@@ -14,7 +14,8 @@
         "codeat3/blade-typicons": "^1.6",
         "khatabwedaa/blade-css-icons": "^1.4",
         "laravel/framework": "^11.31",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "postare/blade-mdi": "^1.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
