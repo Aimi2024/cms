@@ -1,9 +1,9 @@
 <x-layout>
     <div class="w-full h-dvh flex flex-col px-10 py-8 gap-5">
         <div class="w-full flex flex-row items-center justify-end pr-10">
-            <div class="border border-[#707070] p-1">
+            <a href="{{route('medicine.add')}}" class="border border-[#707070] p-1">
                 <x-typ-plus class="w-6 h-6 text-[#FD7E14]" />
-            </div>
+            </a>
         </div>
         <div class="w-full flex items-center gap-9">
             <div class="flex flex-row w-fit h-fit border border-[#707070] rounded-lg bg-white py-1 px-2 items-center">
@@ -30,7 +30,7 @@
                     placeholder="Select date">
             </div>
 
-            <button class="bg-[#FD7E14] rounded-lg py-1 px-2 text-white">
+            <button class="bg-[#FD7E14] rounded-lg py-1 px-4 text-white">
                 Apply filter
             </button>
 
@@ -47,19 +47,19 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- @foreach($medicines as $medicine)
-                    <tr>
-                        <td>{{ $medicine->m_name }}</td> <!-- Display medicine name -->
-                <td>{{ $medicine->m_da }}</td> <!-- Display date added -->
-                <td>{{ $medicine->m_stock }}</td> <!-- Display stock quantity -->
-                <td>{{ $medicine->m_date_expired }}</td> <!-- Display expiration date -->
-                <td>
-                    <!-- Add action buttons like Edit or Delete -->
-                    <a href="{{ route('medicine.edit', $medicine->id) }}">Edit</a> |
-                    <a href="{{ route('medicine.delete', $medicine->id) }}">Delete</a>
-                </td>
+                @foreach($medicines as $medicine)
+                <tr>
+                    <td>{{ $medicine->m_name }}</td> <!-- Display medicine name -->
+                    <td>{{ $medicine->m_da }}</td> <!-- Display date added -->
+                    <td>{{ $medicine->m_stock }}</td> <!-- Display stock quantity -->
+                    <td>{{ $medicine->m_date_expired }}</td> <!-- Display expiration date -->
+                    <td>
+                        <!-- Add action buttons like Edit or Delete -->
+                        <!-- {{-- <a href="{{ route('medicine.edit', $medicine->id) }}">Edit</a> |
+            <a href="{{ route('medicine.delete', $medicine->id) }}">Delete</a> --}} -->
+                    </td>
                 </tr>
-                @endforeach --}}
+                @endforeach
             </tbody>
         </table>
     </div>

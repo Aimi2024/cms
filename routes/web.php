@@ -5,13 +5,12 @@ use Illuminate\Support\Facades\Route;
 
 // Dashboard route
 Route::get('/dashboard', function () {
-    return view('dashboard');  // Fix view syntax
+    return view('dashboard');
 })->name('dashboard');
 
-// Medicine route (view all medicines)
-Route::get('/medicine', function () {
-    return view(view: 'medicine');  // Fix view syntax
-})->name('dashboard');
+// Medicine route (view all medicines via controller)
+Route::get('/medicine', [MedicineController::class, 'showAllMedicines'])
+    ->name('medicine.index');
 
 // Equipments route
 Route::get('/equipments', function () {
@@ -24,8 +23,15 @@ Route::get('/accounts', function () {
 })->name('accounts.index');
 
 // Medicine Controller routes
-Route::get('/medicine/addmedicine', [MedicineController::class, 'index'])  // Show form to add new medicine
+Route::get('/medicine/addmedicine', [MedicineController::class, 'index'])
     ->name('medicine.add');
 
-Route::post('/medicine/addmedicine', [MedicineController::class, 'store'])  // Store new medicine
+Route::post('/medicine/addmedicine', [MedicineController::class, 'store'])
     ->name('medicine.store');
+
+// Edit Medicine Route
+Route::get('/medicine/{id}/edit', [MedicineController::class, 'edit'])
+    ->name('medicine.edit');
+
+Route::put('/medicine/{id}', [MedicineController::class, 'update'])
+    ->name('medicine.update');

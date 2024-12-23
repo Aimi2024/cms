@@ -11,26 +11,27 @@
 
     @vite('resources/css/app.css')
     <title>CMS</title>
-<style>
+    <style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+        /* Adjust the value as needed */
+    }
 
-table {
-    border-collapse: collapse;
-    width: 100%;
-    text-align: center;
-    margin-top: 20px; /* Adjust the value as needed */
-  }
-
-td, th {
-    border: 1px solid rgb(185, 185, 185);
-    border-left: none;
-    border-right: none;
-    padding: 15px;
-  }
-</style>
+    td,
+    th {
+        border: 1px solid rgb(185, 185, 185);
+        border-left: none;
+        border-right: none;
+        padding: 15px;
+    }
+    </style>
 </head>
 
 <body>
-    <div class="flex flex-row w-screen h-dvh">
+    <div class="flex flex-row w-screen h-dvh font-poppins bg-[#E6F7F9]">
         <nav class="w-fit h-dvh flex flex-col bg-[#FDF6EC] px-10 py-12 border-r rounded-r-3xl justify-between">
             <div class="flex flex-col items-center justify-center w-full gap-8 px-5 mt-16 font-semibold h-fit ">
                 <x-nav-link href="/dashboard" :active="request()->is('dashboard')">
