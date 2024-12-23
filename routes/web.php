@@ -19,3 +19,9 @@ Route::get('/equipments', function () {
 Route::get('/accounts', function () {
     return view(view: 'accounts');
 });
+
+
+Route::get('/medecine/addmedicine', function () {
+    return view(view: 'medicine.add-medicine');
+});
+
