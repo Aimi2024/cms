@@ -3,6 +3,8 @@
 use App\Http\Controllers\MedicineController;
 use Illuminate\Support\Facades\Route;
 
+
+
 // Dashboard route
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -47,6 +49,6 @@ Route::get('/medicine/{id}/edit', [MedicineController::class, 'edit'])
     Route::post('/medicine/deduct/{id}', [MedicineController::class, 'deduct'])->name('medicine.deduct');
 
 
-    // route::view("/medicine/deduct/{id}","medicine.deduct-medicine")->name('medicine.deduct');
+
 
 

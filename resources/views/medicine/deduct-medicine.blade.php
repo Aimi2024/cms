@@ -51,7 +51,7 @@
                     <div class="flex flex-row gap-5">
                         <a href="{{route ('medicine.index')}}"
                             class="border border-[#707070] p-2 w-full bg-white text-center rounded-lg">No</a>
-                        <button class="bg-[#FD7E14] p-2 w-full text-white rounded-lg">Add Medicine</button>
+                        <button class="bg-[#FD7E14] p-2 w-full text-white rounded-lg">Deduct Medicine</button>
                     </div>
                 </div>
             </form>
