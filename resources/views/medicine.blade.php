@@ -45,7 +45,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- @foreach($medicines as $medicine)
+                @foreach($medicines as $medicine)
                     <tr>
                         <td>{{ $medicine->m_name }}</td>  <!-- Display medicine name -->
                         <td>{{ $medicine->m_da }}</td>  <!-- Display date added -->
@@ -53,11 +53,11 @@
                         <td>{{ $medicine->m_date_expired }}</td>  <!-- Display expiration date -->
                         <td>
                             <!-- Add action buttons like Edit or Delete -->
-                            <a href="{{ route('medicine.edit', $medicine->id) }}">Edit</a> |
-                            <a href="{{ route('medicine.delete', $medicine->id) }}">Delete</a>
+                            {{-- <a href="{{ route('medicine.edit', $medicine->id) }}">Edit</a> |
+                            <a href="{{ route('medicine.delete', $medicine->id) }}">Delete</a> --}}
                         </td>
                     </tr>
-                @endforeach --}}
+                @endforeach
             </tbody>
         </table>
     </div>

@@ -8,14 +8,11 @@ use Illuminate\Http\Request;
 class MedicineController extends Controller
 {
     // Method to show all medicines
-    // public function showAllMedicines()
-    // {
-    //     // Fetch all medicines from the database
-    //     // $medicines = Medicine::all();
-
-    //     // // Pass the fetched data to the view
-    //     // return view('medicine.index', compact('medicines'));
-    // }
+    public function showAllMedicines()
+    {
+        $medicines = Medicine::latest()->get();
+        return view('medicine', ['medicines' => $medicines]);
+    }
 
     // Method to show the form for adding a new medicine
     public function index()
@@ -39,5 +36,21 @@ class MedicineController extends Controller
 
         // Redirect to the medicine index page with success message
         return redirect()->route('medicine.index')->with('success', 'Medicine added successfully!');
+    }
+
+    // Method to show the edit form
+    public function edit($id)
+    {
+        $medicine = Medicine::findOrFail($id);
+        return view('medicine.edit', compact('medicine'));
+    }
+
+    // Method to update medicine
+    public function update(Request $request, $id)
+    {
+        $medicine = Medicine::findOrFail($id);
+        $medicine->update($request->all());
+
+        return redirect()->route('medicine.index')->with('success', 'Medicine updated successfully!');
     }
 }
