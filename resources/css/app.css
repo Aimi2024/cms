@@ -6,9 +6,9 @@ table {
     border-collapse: collapse;
     width: 100%;
     text-align: center;
-    margin-top: 20px; /* Adjust the value as needed */  
+    margin-top: 20px; /* Adjust the value as needed */
   }
-  
+
 td, th {
     border: 1px solid rgb(185, 185, 185);
     border-left: none;
