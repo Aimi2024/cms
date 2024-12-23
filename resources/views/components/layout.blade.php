@@ -5,11 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/style.css') }}" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/style.css')
+
     @vite('resources/css/app.css')
     <title>CMS</title>
+<style>
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px; /* Adjust the value as needed */
+  }
+
+td, th {
+    border: 1px solid rgb(185, 185, 185);
+    border-left: none;
+    border-right: none;
+    padding: 15px;
+  }
+</style>
 </head>
 
 <body>
@@ -20,7 +37,7 @@
 
                     Dashboard
                 </x-nav-link>
-                <x-nav-link href="/medicine" :active="request()->is('medicine') || request()->is('*product')">
+                <x-nav-link href="/medicine" :active="request()->is('medicine') || request()->is('*addmedicine')">
 
                     Medicine
                 </x-nav-link>

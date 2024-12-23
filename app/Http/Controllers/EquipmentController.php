@@ -10,7 +10,10 @@ class EquipmentController extends Controller
 
     }
 
-    public function store(Request $request){}
+    public function store(Request $request){
+
+
+    }
 
     public function show($id){}
     public function edit($id){}
