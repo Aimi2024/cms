@@ -38,7 +38,8 @@
 
                     Dashboard
                 </x-nav-link>
-                <x-nav-link href="/medicine" :active="request()->is('medicine') || request()->is('*addmedicine')">
+                <x-nav-link href="/medicine"
+                    :active="request()->is('medicine') || request()->is('*addmedicine')||request()->is('*deduct') ">
 
                     Medicine
                 </x-nav-link>
@@ -58,6 +59,7 @@
 
         <div class="w-full h-dvh flex flex-col">
             <div class="w-full h-fit bg-transparent">
+                <!-- header -->
                 <div class="flex flex-row items-center justify-between px-20 py-6">
                     <div>Navigation Url</div>
                     <div>Profile</div>

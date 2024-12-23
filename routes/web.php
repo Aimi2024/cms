@@ -35,3 +35,6 @@ Route::get('/medicine/{id}/edit', [MedicineController::class, 'edit'])
 
 Route::put('/medicine/{id}', [MedicineController::class, 'update'])
     ->name('medicine.update');
+
+
+    route::view("/medicine/deduct","medicine.deduct-medicine")->name('medicine.deduct');
