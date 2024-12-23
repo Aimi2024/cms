@@ -33,8 +33,20 @@ Route::post('/medicine/addmedicine', [MedicineController::class, 'store'])
 Route::get('/medicine/{id}/edit', [MedicineController::class, 'edit'])
     ->name('medicine.edit');
 
-Route::put('/medicine/{id}', [MedicineController::class, 'update'])
-    ->name('medicine.update');
+    Route::get('/medicine/deduct/{id}', function($id) {
+        $medicine = \App\Models\Medicine::find($id);
+
+        if (!$medicine) {
+            abort(404);
+        }
+
+        return view('medicine.deduct-medicine', ['medicine' => $medicine]);
+    })->name('medicine.deductshow');
 
 
-    route::view("/medicine/deduct","medicine.deduct-medicine")->name('medicine.deduct');
+    Route::post('/medicine/deduct/{id}', [MedicineController::class, 'deduct'])->name('medicine.deduct');
+
+
+    // route::view("/medicine/deduct/{id}","medicine.deduct-medicine")->name('medicine.deduct');
+
+

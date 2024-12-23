@@ -20,20 +20,9 @@
                 <option value="audi">Lorem</option>
             </select>
 
-            <div class="flex items-center gap-3 w-fit bg-white border border-[#707070] py-1 px-2 rounded-lg">
-                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                </svg>
-                <input id="datepicker-format" datepicker type="text" class="outline-none w-24"
-                    placeholder="Select date">
-            </div>
-
             <button class="bg-[#FD7E14] rounded-lg py-1 px-4 text-white">
                 Apply filter
             </button>
-
         </div>
 
         <table class="text-center">
@@ -43,21 +32,20 @@
                     <th>Date Added</th>
                     <th>Stock</th>
                     <th>Expiration Date</th>
-                    <th>Actions</th> <!-- Optional column for actions like edit or delete -->
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($medicines as $medicine)
                 <tr>
-                    <td>{{ $medicine->m_name }}</td> <!-- Display medicine name -->
-                    <td>{{ $medicine->m_da }}</td> <!-- Display date added -->
-                    <td>{{ $medicine->m_stock }}</td> <!-- Display stock quantity -->
-                    <td>{{ $medicine->m_date_expired }}</td> <!-- Display expiration date -->
+                    <td>{{ $medicine->m_name }}</td>
+                    <td>{{ $medicine->m_da }}</td>
+                    <td>{{ $medicine->m_stock }}</td>
+                    <td>{{ $medicine->m_date_expired }}</td>
                     <td class="relative">
-                        <a href="{{ route('medicine.deduct', $medicine->id) }}">
+                        <a href="{{ route('medicine.deductshow', $medicine->m_id) }}">
                             <x-mdi-minus-box-outline class="text-red-400 w-7 h-7 absolute inset-0 m-auto" />
                         </a>
-
                     </td>
                 </tr>
                 @endforeach

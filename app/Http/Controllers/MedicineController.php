@@ -7,23 +7,22 @@ use Illuminate\Http\Request;
 
 class MedicineController extends Controller
 {
-    // Method to show all medicines
+    // Show all medicines
     public function showAllMedicines()
     {
         $medicines = Medicine::latest()->get();
         return view('medicine', ['medicines' => $medicines]);
     }
 
-    // Method to show the form for adding a new medicine
+    // Show add-medicine form
     public function index()
     {
         return view('medicine.add-medicine');
     }
 
-    // Method to store a new medicine
+    // Store new medicine
     public function store(Request $request)
     {
-        // Validate the input
         $medicineValidate = $request->validate([
             "m_name" => ['required'],
             'm_da' => ['required'],
@@ -31,21 +30,19 @@ class MedicineController extends Controller
             'm_date_expired' => ['required'],
         ]);
 
-        // Create a new medicine entry in the database
         Medicine::create($medicineValidate);
 
-        // Redirect to the medicine index page with success message
         return redirect()->route('medicine.index')->with('success', 'Medicine added successfully!');
     }
 
-    // Method to show the edit form
+    // Show edit form
     public function edit($id)
     {
         $medicine = Medicine::findOrFail($id);
         return view('medicine.edit', compact('medicine'));
     }
 
-    // Method to update medicine
+    // Update medicine
     public function update(Request $request, $id)
     {
         $medicine = Medicine::findOrFail($id);
@@ -53,4 +50,34 @@ class MedicineController extends Controller
 
         return redirect()->route('medicine.index')->with('success', 'Medicine updated successfully!');
     }
+
+    // Show deduct form
+    public function showDeduct($id)
+    {
+        $medicine = Medicine::findOrFail($id);
+        return view('medicine.deduct-medicine', compact('medicine'));
+    }
+
+    public function deduct(Request $request, $id)
+{
+    $medicine = Medicine::findOrFail($id);
+
+    // Validate the quantity input (ensure it doesn't exceed current stock)
+    $request->validate([
+        'deduct_quantity' => 'required|integer|min:1|max:' . $medicine->m_stock, // Prevent more than available stock
+    ]);
+
+    // Deduct the quantity from the stock
+    $medicine->m_stock -= $request->deduct_quantity;
+
+    // Ensure stock doesn't go below zero
+    $medicine->m_stock = max(0, $medicine->m_stock);
+
+    // Save the updated stock in the database
+    $medicine->save();
+
+    // Redirect with a success message
+    return redirect()->route('medicine.index')->with('success', 'Medicine stock deducted successfully!');
+}
+
 }

@@ -39,10 +39,9 @@
                     Dashboard
                 </x-nav-link>
                 <x-nav-link href="/medicine"
-                    :active="request()->is('medicine') || request()->is('*addmedicine')||request()->is('*deduct') ">
-
-                    Medicine
-                </x-nav-link>
+                :active="request()->is('medicine') || request()->is('*addmedicine') || request()->is('medicine/deduct/*')">
+                Medicine
+            </x-nav-link>
                 <x-nav-link href="/equipments" :active="request()->is('equipments')">
                     Equipments
                 </x-nav-link>

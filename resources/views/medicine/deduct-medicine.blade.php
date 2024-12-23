@@ -3,15 +3,16 @@
         <h1 class="font-bold text-[clamp(0.9rem,5vw,3.5rem)] text-left">Deduct Medicine</h1>
 
         <div class="w-full h-dvh flex flex-col items-center">
-            <form class="flex gap-40" method="POST" action="{{ route('medicine.store') }}">
+            <form class="flex gap-40" method="POST" action="{{ route('medicine.deduct', ['id' => $medicine->m_  id]) }}">
+
                 @csrf
                 @method("POST")
 
                 <div class="flex flex-col gap-10">
                     <div class="flex flex-col">
                         <label for="name" class="font-bold">Product Name</label>
-                        <input id="name" name="m_name" type="text"
-                            class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
+                        <input id="name" name="m_name" type="text" value="{{ $medicine->m_name }}"
+                        readonly   class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
                     </div>
                     <div class="flex flex-col">
                         <label for="Arrived" class="font-bold">Product Date Arrived</label>
@@ -22,8 +23,8 @@
                                 <path
                                     d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                             </svg>
-                            <input id="datepicker-arrived" datepicker type="text" class="outline-none px-3 py-1"
-                                placeholder="Select date">
+                            <input id="datepicker-arrived" value="{{ $medicine->m_da }}" datepicker type="text" class="outline-none px-3 py-1"
+                            readonly placeholder="Select date">
                         </div>
                     </div>
                 </div>
@@ -31,7 +32,7 @@
                 <div class="flex flex-col gap-10">
                     <div class="flex flex-col">
                         <label for="Stock" class="font-bold">Product Stock</label>
-                        <input id="Stock" name="m_stock" type="text"
+                        <input id="Stock" name="deduct_quantity" type="text"
                             class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
                     </div>
                     <div class="flex flex-col">
@@ -43,8 +44,8 @@
                                 <path
                                     d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                             </svg>
-                            <input id="datepicker-expired" datepicker type="text" class="outline-none px-3 py-1"
-                                placeholder="Select date">
+                            <input id="datepicker-expired" datepicker value="{{ $medicine->m_date_expired }}" type="text" class="outline-none px-3 py-1"
+                            readonly placeholder="Select date">
                         </div>
                     </div>
                     <div class="flex flex-row gap-5">
