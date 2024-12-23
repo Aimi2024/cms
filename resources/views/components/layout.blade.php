@@ -17,9 +17,11 @@
         <nav class="w-fit h-dvh flex flex-col bg-[#FDF6EC] px-10 py-12 border-r rounded-r-3xl justify-between">
             <div class="flex flex-col items-center justify-center w-full gap-8 px-5 mt-16 font-semibold h-fit ">
                 <x-nav-link href="/dashboard" :active="request()->is('dashboard')">
+
                     Dashboard
                 </x-nav-link>
                 <x-nav-link href="/medicine" :active="request()->is('medicine') || request()->is('*product')">
+
                     Medicine
                 </x-nav-link>
                 <x-nav-link href="/equipments" :active="request()->is('equipments')">
