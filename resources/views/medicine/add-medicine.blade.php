@@ -8,12 +8,12 @@
                 @method("POST")
 
                 <div class="flex flex-col gap-10">
-                    <div class="flex flex-col">
+                    <div class="flex flex-col gap-1">
                         <label for="name" class="font-bold">Product Name</label>
                         <input id="name" name="m_name" type="text"
                             class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
                     </div>
-                    <div class="flex flex-col">
+                    <div class="flex flex-col gap-1">
                         <label for="arrived" class="font-bold">Product Date Arrived</label>
                         <input id="arrived" name="m_da" type="date"
                             class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
@@ -21,12 +21,12 @@
                 </div>
 
                 <div class="flex flex-col gap-10">
-                    <div class="flex flex-col">
+                    <div class="flex flex-col gap-1">
                         <label for="stock" class="font-bold">Product Stock</label>
                         <input id="stock" name="m_stock" type="number"
                             class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
                     </div>
-                    <div class="flex flex-col">
+                    <div class="flex flex-col gap-1">
                         <label for="expired" class="font-bold">Product Date Expired</label>
                         <input id="expired" name="m_date_expired" type="date"
                             class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
