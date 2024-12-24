@@ -3,14 +3,12 @@
 use App\Http\Controllers\MedicineController;
 use Illuminate\Support\Facades\Route;
 
-
-
 // Dashboard route
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-// Medicine route (view all medicines via controller)
+// Medicine route (view all medicines and search)
 Route::get('/medicine', [MedicineController::class, 'showAllMedicines'])
     ->name('medicine.index');
 
@@ -31,26 +29,9 @@ Route::get('/medicine/addmedicine', [MedicineController::class, 'index'])
 Route::post('/medicine/addmedicine', [MedicineController::class, 'store'])
     ->name('medicine.store');
 
-// Edit Medicine Route
-// Route::get('/medicine/{id}/edit', [MedicineController::class, 'edit'])
-//     ->name('medicine.edit');
+// Deduct Medicine Routes
+Route::get('/medicine/deduct/{id}', [MedicineController::class, 'showDeductForm'])
+    ->name('medicine.deductshow');
 
-    // Route::get('/medicine/deduct/{id}', function($id) {
-    //     $medicine = \App\Models\Medicine::find($id);
-
-    //     if (!$medicine) {
-    //         abort(404);
-    //     }
-
-    //     return view('medicine.deduct-medicine', ['medicine' => $medicine]);
-    // })->name('medicine.deductshow');
-
-
-    Route::get('/medicine/deduct/{id}', [MedicineController::class, 'showDeductForm'])->name('medicine.deductshow');
-
-    Route::post('/medicine/deduct/{id}', [MedicineController::class, 'deduct'])->name('medicine.deduct');
-
-
-
-
-
+Route::post('/medicine/deduct/{id}', [MedicineController::class, 'deduct'])
+    ->name('medicine.deduct');
