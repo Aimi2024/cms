@@ -8,11 +8,20 @@ use Illuminate\Http\Request;
 class MedicineController extends Controller
 {
     // Show all medicines
+    // public function showAllMedicines()
+    // {
+    //     $medicines = Medicine::latest()->get();
+    //     return view('medicine', ['medicines' => $medicines]);
+    // }
     public function showAllMedicines()
     {
-        $medicines = Medicine::latest()->get();
+        $medicines = Medicine::latest()->paginate(5);  // 10 medicines per page
         return view('medicine', ['medicines' => $medicines]);
     }
+
+
+
+
 
     // Show add-medicine form
     public function index()
@@ -35,21 +44,21 @@ class MedicineController extends Controller
         return redirect()->route('medicine.index')->with('success', 'Medicine added successfully!');
     }
 
-    // Show edit form
-    public function edit($id)
-    {
-        $medicine = Medicine::findOrFail($id);
-        return view('medicine.edit', compact('medicine'));
-    }
+    // // Show edit form
+    // public function edit($id)
+    // {
+    //     $medicine = Medicine::findOrFail($id);
+    //     return view('medicine.edit', compact('medicine'));
+    // }
 
-    // Update medicine
-    public function update(Request $request, $id)
-    {
-        $medicine = Medicine::findOrFail($id);
-        $medicine->update($request->all());
+    // // Update medicine
+    // public function update(Request $request, $id)
+    // {
+    //     $medicine = Medicine::findOrFail($id);
+    //     $medicine->update($request->all());
 
-        return redirect()->route('medicine.index')->with('success', 'Medicine updated successfully!');
-    }
+    //     return redirect()->route('medicine.index')->with('success', 'Medicine updated successfully!');
+    // }
 
     // Show deduct form
     public function showDeduct($id)
@@ -78,6 +87,21 @@ class MedicineController extends Controller
 
     // Redirect with a success message
     return redirect()->route('medicine.index')->with('success', 'Medicine stock deducted successfully!');
+}
+
+public function showDeductForm($id)
+{
+    $medicine = Medicine::find($id);
+
+    if (!$medicine) {
+        abort(404);
+    }
+
+    return view('medicine.deduct-medicine', ['medicine' => $medicine]);
+}
+
+public function search (){
+
 }
 
 }

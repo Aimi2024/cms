@@ -51,5 +51,11 @@
                 @endforeach
             </tbody>
         </table>
+
+        <!-- Pagination Links -->
+        <div class="mt-4 flex justify-center">
+            {!! $medicines->links() !!}
+        </div>
+
     </div>
 </x-layout>
