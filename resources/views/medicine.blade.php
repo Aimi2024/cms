@@ -11,7 +11,8 @@
             <div class="flex flex-row w-fit h-fit border border-[#707070] rounded-lg bg-white py-1 px-2 items-center">
                 <form action="{{ route('medicine.index') }}" method="GET">
                     <input class="bg-transparent outline-none px-1" name="query" type="text"
-                        value={{ request('query') }}   placeholder="Search medicine...">
+                    value="{{ request('query') }}" placeholder="Search medicine...">
+
                     <button type="submit">
                         <x-css-search />
                     </button>

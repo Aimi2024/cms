@@ -1,4 +1,6 @@
 <?php
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\RegisteredUserController;
 
 use App\Http\Controllers\MedicineController;
 use Illuminate\Support\Facades\Route;
@@ -35,3 +37,16 @@ Route::get('/medicine/deduct/{id}', [MedicineController::class, 'showDeductForm'
 
 Route::post('/medicine/deduct/{id}', [MedicineController::class, 'deduct'])
     ->name('medicine.deduct');
+
+
+    // Route::middleware('guest')->group(function () {
+    //     // Route::get('/', [SessionController::class, 'create'])->name('login');
+    //     // Route::post('/', [SessionController::class, 'store']);
+    //     Route::get('/accounts', [RegisteredUserController::class, 'create']);
+    //     Route::post('/accounts', [RegisteredUserController::class, 'store']);
+    // });
+
+    Route::middleware('guest')->group(function () {
+        Route::get('/accounts', [RegisteredUserController::class, 'create'])->name('accounts.create');
+        Route::post('/accounts', [RegisteredUserController::class, 'store'])->name('accounts.store');
+    });

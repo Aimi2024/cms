@@ -47,7 +47,7 @@ class MedicineController extends Controller
             ->with('success', 'Medicine added successfully!');
     }
 
-    // Show deduct form
+    // Show deduct form`
     public function showDeductForm($id)
     {
         $medicine = Medicine::findOrFail($id);
