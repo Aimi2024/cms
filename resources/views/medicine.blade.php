@@ -8,6 +8,7 @@
 
         <!-- Search & Filter Section -->
         <div class="w-full flex items-center gap-9">
+<<<<<<< HEAD
             <div class="flex flex-row w-fit h-fit border border-[#707070] rounded-lg bg-white py-1 px-2 items-center">
                 <form action="{{ route('medicine.index') }}" method="GET">
                     <input class="bg-transparent outline-none px-1" name="query" type="text"
@@ -18,6 +19,16 @@
                     </button>
                 </form>
             </div>
+=======
+            <form class="flex flex-row w-fit h-fit border border-[#707070] rounded-lg bg-white py-1 px-2 items-center"
+                action="{{ route('medicine.index') }}" method="GET">
+                <input class="bg-transparent outline-none px-1" name="query" type="text" value="{{ request('query') }}"
+                    placeholder="Search medicine...">
+                <button type="submit">
+                    <x-css-search />
+                </button>
+            </form>
+>>>>>>> 8b6dbe538061f5232545878dbcd42258b9f96dd7
 
             <select class="bg-transparent outline-none border border-[#707070] rounded-lg bg-white py-1 px-2">
                 <option value="volvo" hidden>TYPE OF MEDICINE</option>
@@ -26,7 +37,9 @@
                 <option value="audi">Lorem</option>
             </select>
 
-            <button class="bg-[#FD7E14] rounded-lg py-1 px-4 text-white" type="submit">
+            <button
+                class="bg-[#FD7E14] rounded-lg py-1 px-4 text-white hover:bg-white hover:text-black hover:border hover:border-[#707070]"
+                type="submit">
                 Apply filter
             </button>
         </div>
@@ -44,17 +57,17 @@
             </thead>
             <tbody>
                 @foreach($medicines as $medicine)
-                    <tr>
-                        <td>{{ $medicine->m_name }}</td>
-                        <td>{{ $medicine->m_da }}</td>
-                        <td>{{ $medicine->m_stock }}</td>
-                        <td>{{ $medicine->m_date_expired }}</td>
-                        <td class="relative">
-                            <a href="{{ route('medicine.deductshow', $medicine->m_id) }}">
-                                <x-mdi-minus-box-outline class="text-red-400 w-7 h-7 absolute inset-0 m-auto" />
-                            </a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{ $medicine->m_name }}</td>
+                    <td>{{ $medicine->m_da }}</td>
+                    <td>{{ $medicine->m_stock }}</td>
+                    <td>{{ $medicine->m_date_expired }}</td>
+                    <td class="relative">
+                        <a href="{{ route('medicine.deductshow', $medicine->m_id) }}">
+                            <x-mdi-minus-box-outline class="text-red-400 w-7 h-7 absolute inset-0 m-auto" />
+                        </a>
+                    </td>
+                </tr>
                 @endforeach
             </tbody>
         </table>

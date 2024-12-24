@@ -31,19 +31,17 @@
 </head>
 
 <body>
-    @props(['close' => false])
     <div class="flex flex-row w-screen h-dvh font-poppins bg-[#E6F7F9]">
 
         <nav id="mySidenav"
-            class="relative overflow-hidden w-fit h-dvh flex flex-col bg-[#FDF6EC] px-10 py-12 border-r rounded-r-3xl justify-between">
+            class="relative overflow-hidden w-72 h-dvh flex flex-col bg-[#FDF6EC] px-10 py-12 border-r rounded-r-3xl justify-between transition-all duration-300">
 
             <button onclick="closeNav()" class="absolute top-6 right-8 w-7 h-7">
                 <x-uni-left-arrow-from-left-o />
             </button>
 
-            <div class="flex flex-col items-center justify-center w-full gap-8 px-5 mt-16 font-semibold h-fit ">
+            <div class="flex flex-col items-center justify-center w-full gap-8 px-[2px] mt-16 font-semibold h-fit">
                 <x-nav-link href="/dashboard" :active="request()->is('dashboard')">
-
                     Dashboard
                 </x-nav-link>
                 <x-nav-link href="/medicine"
@@ -84,7 +82,7 @@
 
     <script>
     function openNav() {
-        document.getElementById("mySidenav").style.width = "fit-content";
+        document.getElementById("mySidenav").style.width = "288px";
     }
 
     function closeNav() {
