@@ -31,17 +31,25 @@
 </head>
 
 <body>
+    @props(['close' => false])
     <div class="flex flex-row w-screen h-dvh font-poppins bg-[#E6F7F9]">
-        <nav class="w-fit h-dvh flex flex-col bg-[#FDF6EC] px-10 py-12 border-r rounded-r-3xl justify-between">
+
+        <nav id="mySidenav"
+            class="relative overflow-hidden w-fit h-dvh flex flex-col bg-[#FDF6EC] px-10 py-12 border-r rounded-r-3xl justify-between">
+
+            <button onclick="closeNav()" class="absolute top-6 right-8 w-7 h-7">
+                <x-uni-left-arrow-from-left-o />
+            </button>
+
             <div class="flex flex-col items-center justify-center w-full gap-8 px-5 mt-16 font-semibold h-fit ">
                 <x-nav-link href="/dashboard" :active="request()->is('dashboard')">
 
                     Dashboard
                 </x-nav-link>
                 <x-nav-link href="/medicine"
-                :active="request()->is('medicine') || request()->is('*addmedicine') || request()->is('medicine/deduct/*')">
-                Medicine
-            </x-nav-link>
+                    :active="request()->is('medicine') || request()->is('*addmedicine') || request()->is('medicine/deduct/*')">
+                    Medicine
+                </x-nav-link>
                 <x-nav-link href="/equipments" :active="request()->is('equipments')">
                     Equipments
                 </x-nav-link>
@@ -52,7 +60,11 @@
             <form method="POST" action="/logout">
                 @csrf
                 @method("POST")
-                {{-- <x-button-logout>Log out</x-button-logout> --}}
+                <button
+                    class="text-[#FD7E14] border-2 border-[#FD7E14] w-full rounded-lg py-2 hover:bg-[#FD7E14] hover:text-white font-bold"
+                    type="submit">
+                    Log Out
+                </button>
             </form>
         </nav>
 
@@ -69,6 +81,16 @@
 
         </div>
     </div>
+
+    <script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "fit-content";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+    </script>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
