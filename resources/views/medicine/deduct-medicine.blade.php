@@ -3,7 +3,7 @@
         <h1 class="font-bold text-[clamp(0.9rem,5vw,3.5rem)] text-left">Deduct Medicine</h1>
 
         <div class="w-full h-dvh flex flex-col items-center">
-            <form class="flex gap-40" method="POST" action="{{ route('medicine.deduct', ['id' => $medicine->m_  id]) }}">
+            <form class="flex gap-40" method="POST" action="{{ route('medicine.deduct', ['id' => $medicine->m_id]) }}">
 
                 @csrf
                 @method("POST")

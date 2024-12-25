@@ -1,5 +1,12 @@
 <x-layout>
     <div class="w-full h-dvh flex flex-col px-10 py-8 gap-5">
+        <!-- Success Notification -->
+        @if(session('success'))
+            <div class="bg-green-100 text-green-800 p-4 rounded-lg mb-4 border-l-4 border-green-500">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <div class="w-full flex flex-row items-center justify-end pr-10">
             <a href="{{ route('medicine.add') }}" class="border border-[#707070] p-1">
                 <x-typ-plus class="w-6 h-6 text-[#FD7E14]" />
@@ -8,18 +15,6 @@
 
         <!-- Search & Filter Section -->
         <div class="w-full flex items-center gap-9">
-<<<<<<< HEAD
-            <div class="flex flex-row w-fit h-fit border border-[#707070] rounded-lg bg-white py-1 px-2 items-center">
-                <form action="{{ route('medicine.index') }}" method="GET">
-                    <input class="bg-transparent outline-none px-1" name="query" type="text"
-                    value="{{ request('query') }}" placeholder="Search medicine...">
-
-                    <button type="submit">
-                        <x-css-search />
-                    </button>
-                </form>
-            </div>
-=======
             <form class="flex flex-row w-fit h-fit border border-[#707070] rounded-lg bg-white py-1 px-2 items-center"
                 action="{{ route('medicine.index') }}" method="GET">
                 <input class="bg-transparent outline-none px-1" name="query" type="text" value="{{ request('query') }}"
@@ -28,7 +23,6 @@
                     <x-css-search />
                 </button>
             </form>
->>>>>>> 8b6dbe538061f5232545878dbcd42258b9f96dd7
 
             <select class="bg-transparent outline-none border border-[#707070] rounded-lg bg-white py-1 px-2">
                 <option value="volvo" hidden>TYPE OF MEDICINE</option>

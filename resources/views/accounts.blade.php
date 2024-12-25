@@ -2,6 +2,24 @@
     <div class="w-full h-dvh flex flex-col gap-10 p-10 overflow-hidden">
         <h1 class="font-bold text-[clamp(0.9rem,5vw,3.5rem)] text-left">Create Account</h1>
 
+        <!-- Display a success message if available -->
+        @if(session('success'))
+            <div class="bg-green-100 text-green-800 p-4 rounded-lg mb-4 border-l-4 border-green-500">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <!-- Display a general error message if there are any -->
+        @if ($errors->any())
+            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="w-full h-dvh flex flex-col items-center">
             <form class="flex gap-40" method="POST" action="{{ route('accounts.store') }}">
                 @csrf
@@ -62,7 +80,7 @@
                     </div>
 
                     <div class="flex flex-row gap-5">
-                        <a href="{{ route('medicine.index') }}"
+                        <a href="{{ route('medicine.index') }} "
                             class="border border-[#707070] p-2 w-full bg-white text-center rounded-lg hover:bg-[#FD7E14] hover:text-white hover:border-none flex items-center justify-center">No</a>
                         <button
                             class="bg-[#FD7E14] text-xs p-2 w-full text-white rounded-lg hover:border hover:border-[#707070] hover:bg-white hover:text-black flex items-center justify-center">Create

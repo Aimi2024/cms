@@ -20,9 +20,9 @@ Route::get('/equipments', function () {
 })->name('equipments.index');
 
 // Accounts route
-Route::get('/accounts', function () {
-    return view('accounts');
-})->name('accounts.index');
+// Route::get('/account', function () {
+//     return view('accounts');
+// })->name('accounts.index');
 
 // Medicine Controller routes
 Route::get('/medicine/addmedicine', [MedicineController::class, 'index'])
@@ -38,15 +38,13 @@ Route::get('/medicine/deduct/{id}', [MedicineController::class, 'showDeductForm'
 Route::post('/medicine/deduct/{id}', [MedicineController::class, 'deduct'])
     ->name('medicine.deduct');
 
+    Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 
-    // Route::middleware('guest')->group(function () {
-    //     // Route::get('/', [SessionController::class, 'create'])->name('login');
-    //     // Route::post('/', [SessionController::class, 'store']);
-    //     Route::get('/accounts', [RegisteredUserController::class, 'create']);
-    //     Route::post('/accounts', [RegisteredUserController::class, 'store']);
-    // });
+    Route::get('/account', [RegisteredUserController::class, 'create'])->name('accounts.create');
+    Route::post('/account', [RegisteredUserController::class, 'store'])->name('accounts.store');
 
     Route::middleware('guest')->group(function () {
-        Route::get('/accounts', [RegisteredUserController::class, 'create'])->name('accounts.create');
-        Route::post('/accounts', [RegisteredUserController::class, 'store'])->name('accounts.store');
+        Route::get('/', [SessionController::class, 'create'])->name('login');
+        Route::post('/', [SessionController::class, 'store']);
+
     });

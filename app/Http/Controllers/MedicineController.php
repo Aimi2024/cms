@@ -41,11 +41,16 @@ class MedicineController extends Controller
             'm_date_expired' => ['required'],
         ]);
 
-        Medicine::create($medicineValidate);
+        // Create the medicine record
+        $medicine = Medicine::create($medicineValidate);
 
-        return redirect()->route('medicine.index')
-            ->with('success', 'Medicine added successfully!');
+        // Flash a success message with the name of the added medicine
+        session()->flash('success', $medicine->m_name . ' has been added successfully!');
+
+        // Redirect to the medicine index page
+        return redirect()->route('medicine.index');
     }
+
 
     // Show deduct form`
     public function showDeductForm($id)
@@ -68,6 +73,6 @@ class MedicineController extends Controller
         $medicine->save();
 
         return redirect()->route('medicine.index')
-            ->with('success', 'Medicine stock deducted successfully!');
+            ->with('success', $medicine->m_name.' stock deducted successfully!');
     }
 }

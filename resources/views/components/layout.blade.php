@@ -51,9 +51,14 @@
                 <x-nav-link href="/equipments" :active="request()->is('equipments')">
                     Equipments
                 </x-nav-link>
-                <x-nav-link href="/accounts" :active="request()->is('accounts')">
-                    Accounts
-                </x-nav-link>
+                @auth
+                @if(auth()->user()->type === 'admin')
+                    <x-nav-link href="/account" :active="request()->is('account')">
+                        Accounts
+                    </x-nav-link>
+                @endif
+            @endauth
+
             </div>
             <form method="POST" action="/logout">
                 @csrf
