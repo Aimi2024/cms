@@ -1,6 +1,6 @@
 <x-layout>
     <div class="w-full h-dvh flex flex-col px-10 py-8 gap-5">
-        <div class="w-full flex flex-row items-center justify-end pr-10">
+        <div class="w-full flex flex-row items-center justify-end pr-10 h-5">
             <a href=""
                 class="hover:border hover:border-[#707070] hover:bg-white bg-[#FD7E14] px-3 py-2 flex items-start gap-3 rounded-3xl hover:text-[#FD7E14] text-white">
                 <x-typ-plus class="w-6 h-6 " />
