@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.2",
         "afatmustafa/blade-hugeicons": "^0.0.4",
+        "andreiio/blade-remix-icon": "^3.6",
         "codeat3/blade-typicons": "^1.6",
         "codeat3/blade-unicons": "^1.8",
         "khatabwedaa/blade-css-icons": "^1.4",

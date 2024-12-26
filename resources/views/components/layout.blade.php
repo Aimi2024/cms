@@ -27,6 +27,26 @@
         border-right: none;
         padding: 15px;
     }
+
+    #mySidenav {
+        transition: all 0.3s;
+    }
+
+    #mySidenav.collapsed {
+        width: 80px;
+    }
+
+    #mySidenav.collapsed .nav-text {
+        display: none;
+    }
+
+    #mySidenav.collapsed .nav-icon {
+        margin: 0 auto;
+    }
+
+    .transition-transform {
+        transition: transform 0.3s ease-in-out;
+    }
     </style>
 </head>
 
@@ -36,8 +56,8 @@
         <nav id="mySidenav"
             class="relative overflow-hidden w-72 h-dvh flex flex-col bg-[#FDF6EC] px-10 py-12 border-r rounded-r-3xl justify-between transition-all duration-300">
 
-            <button onclick="closeNav()" class="absolute top-6 right-8 w-7 h-7">
-                <x-uni-left-arrow-from-left-o />
+            <button id="toggleButton" onclick="toggleNav()" class="absolute top-6 right-8 w-7 h-7">
+                <x-uni-left-arrow-from-left-o id="arrowIcon" class="transition-transform duration-300" />
             </button>
 
             <div class="flex flex-col items-center justify-center w-full gap-8 px-[2px] mt-16 font-semibold h-fit">
@@ -53,18 +73,18 @@
                 </x-nav-link>
                 @auth
                 @if(auth()->user()->type === 'admin')
-                    <x-nav-link href="/account" :active="request()->is('account')">
-                        Accounts
-                    </x-nav-link>
+                <x-nav-link href="/account" :active="request()->is('account')">
+                    Accounts
+                </x-nav-link>
                 @endif
-            @endauth
+                @endauth
 
             </div>
             <form method="POST" action="/logout">
                 @csrf
                 @method("POST")
                 <button
-                    class="text-[#FD7E14] border-2 border-[#FD7E14] w-full rounded-lg py-2 hover:bg-[#FD7E14] hover:text-white font-bold"
+                    class="text-[#FD7E14] border-2 border-[#FD7E14] w-full rounded-lg py-2 hover:bg-[#FD7E14] hover:text-white font-bold overflow-hidden whitespace-nowrap"
                     type="submit">
                     Log Out
                 </button>
@@ -86,12 +106,17 @@
     </div>
 
     <script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "288px";
-    }
+    function toggleNav() {
+        const sidenav = document.getElementById('mySidenav');
+        const arrowIcon = document.getElementById('arrowIcon');
 
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
+        sidenav.classList.toggle('collapsed');
+
+        if (sidenav.classList.contains('collapsed')) {
+            arrowIcon.style.transform = 'rotate(180deg)';
+        } else {
+            arrowIcon.style.transform = 'rotate(0deg)';
+        }
     }
     </script>
 
