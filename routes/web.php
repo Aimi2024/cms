@@ -12,6 +12,26 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+
+Route::get('/medicine/deductedtable', function () {
+    return view('medicine.deducted-table-medicine');
+});
+
+Route::get('/equipments/addequipments', function () {
+    return view('equipments.eq-add');
+});
+
+
+
+Route::get('/equipments/deductequipments', function () {
+    return view('equipments.eq-deduct');
+});
+
+Route::get('/equipments/deducttable', function () {
+    return view('equipments.eq-deduct-table');
+});
+
+
 // Medicine route (view all medicines and search)
 Route::get('/medicine', [MedicineController::class, 'showAllMedicines'])
     ->name('medicine.index');
