@@ -9,13 +9,18 @@ use Illuminate\Validation\ValidationException;
 class SessionController extends Controller
 {
     // Show the login page or redirect to the index page if the user is authenticated
-    public function create()
+    public function create(Request $request)
     {
         if (Auth::check()) {
-            return redirect()->route(route: 'dashboard');
+            return redirect()->route('dashboard');
         }
 
-        return view(view: 'auth.signin');
+        // Prevent caching of the sign-in page
+        return response(view('auth.signin'))->withHeaders([
+            'Cache-Control' => 'no-cache, no-store, must-revalidate',
+            'Pragma' => 'no-cache',
+            'Expires' => '0',
+        ]);
     }
 
     // Handle login
@@ -37,13 +42,23 @@ class SessionController extends Controller
         $request->session()->regenerate();
 
         // Redirect to the intended page or the default index page
-        return redirect()->intended(route(name: 'dashboard'));
+        return redirect()->intended(route('dashboard'));
     }
 
     // Handle logout
-    public function destroy()
+    public function destroy(Request $request)
     {
         Auth::logout();
-        return redirect()->route('login');
+
+        // Invalidate the session
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // Prevent back button use after logout
+        return redirect()->route('login')->withHeaders([
+            'Cache-Control' => 'no-cache, no-store, must-revalidate',
+            'Pragma' => 'no-cache',
+            'Expires' => '0',
+        ]);
     }
 }
