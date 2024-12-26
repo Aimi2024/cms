@@ -5,6 +5,8 @@ use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\MedicineController;
 use Illuminate\Support\Facades\Route;
 
+Route::middleware('auth')->group(function () {
+
 // Dashboard route
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -44,7 +46,7 @@ Route::post('/medicine/deduct/{id}', [MedicineController::class, 'deduct'])
     Route::post('/account', [RegisteredUserController::class, 'store'])->name('accounts.store');
     Route::get('/account/register', [RegisteredUserController::class, 'createAccount'])->name('accounts.register');
 
-
+});
 
 
     Route::middleware('guest')->group(function () {
