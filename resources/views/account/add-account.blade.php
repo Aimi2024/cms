@@ -79,7 +79,7 @@
                     </div>
 
                     <div class="flex flex-row gap-5">
-                        <a href="{{ route('medicine.index') }} "
+                        <a href="{{ route('accounts.create') }} "
                             class="border border-[#707070] p-2 w-full bg-white text-center rounded-lg hover:bg-[#FD7E14] hover:text-white hover:border-none flex items-center justify-center">No</a>
                         <button
                             class="bg-[#FD7E14] text-xs p-2 w-full text-white rounded-lg hover:border hover:border-[#707070] hover:bg-white hover:text-black flex items-center justify-center">Create

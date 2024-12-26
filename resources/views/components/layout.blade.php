@@ -73,9 +73,10 @@
                 </x-nav-link>
                 @auth
                 @if(auth()->user()->type === 'admin')
-                <x-nav-link href="/account" :active="request()->is('account')">
+                <x-nav-link href="/account" :active="request()->is('account') || request()->is('account/register')">
                     Accounts
                 </x-nav-link>
+
                 @endif
                 @endauth
 

@@ -42,6 +42,10 @@ Route::post('/medicine/deduct/{id}', [MedicineController::class, 'deduct'])
 
     Route::get('/account', [RegisteredUserController::class, 'create'])->name('accounts.create');
     Route::post('/account', [RegisteredUserController::class, 'store'])->name('accounts.store');
+    Route::get('/account/register', [RegisteredUserController::class, 'createAccount'])->name('accounts.register');
+
+
+
 
     Route::middleware('guest')->group(function () {
         Route::get('/', [SessionController::class, 'create'])->name('login');
