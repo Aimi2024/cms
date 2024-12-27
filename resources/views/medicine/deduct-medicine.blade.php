@@ -11,8 +11,8 @@
                 <div class="flex flex-col gap-10">
                     <div class="flex flex-col">
                         <label for="name" class="font-bold">Product Name</label>
-                        <input id="name" name="m_name" type="text" value="{{ $medicine->m_name }}"
-                        readonly   class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
+                        <input id="name" name="m_name" type="text" value="{{ $medicine->m_name }}" readonly
+                            class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
                     </div>
                     <div class="flex flex-col">
                         <label for="Arrived" class="font-bold">Product Date Arrived</label>
@@ -23,8 +23,8 @@
                                 <path
                                     d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                             </svg>
-                            <input id="datepicker-arrived" value="{{ $medicine->m_da }}" datepicker type="text" class="outline-none px-3 py-1"
-                            readonly placeholder="Select date">
+                            <input id="datepicker-arrived" value="{{ $medicine->m_da }}" datepicker type="text"
+                                class="outline-none px-3 py-1" readonly placeholder="Select date">
                         </div>
                     </div>
                 </div>
@@ -44,14 +44,16 @@
                                 <path
                                     d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                             </svg>
-                            <input id="datepicker-expired" datepicker value="{{ $medicine->m_date_expired }}" type="text" class="outline-none px-3 py-1"
-                            readonly placeholder="Select date">
+                            <input id="datepicker-expired" datepicker value="{{ $medicine->m_date_expired }}"
+                                type="text" class="outline-none px-3 py-1" readonly placeholder="Select date">
                         </div>
                     </div>
                     <div class="flex flex-row gap-5">
                         <a href="{{route ('medicine.index')}}"
-                            class="border border-[#707070] p-2 w-full bg-white text-center rounded-lg">No</a>
-                        <button class="bg-[#FD7E14] p-2 w-full text-white rounded-lg">Deduct Medicine</button>
+                            class="border border-[#707070] p-2 w-full bg-white text-center rounded-lg flex justify-center items-center hover:bg-[#FD7E14] hover:text-white hover:border-none">No</a>
+                        <button
+                            class="bg-[#FD7E14] p-2 w-full text-white rounded-lg hover:border hover:border-[#707070] hover:bg-white hover:text-black">Deduct
+                            Medicine</button>
                     </div>
                 </div>
             </form>
