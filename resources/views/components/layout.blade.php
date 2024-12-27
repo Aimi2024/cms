@@ -43,7 +43,15 @@
     }
 
     #mySidenav.collapsed .nav-icon {
-        margin: 0 auto;
+        display: block;
+    }
+
+    .nav-icon {
+        display: none;
+    }
+
+    .nav-text {
+        display: inline;
     }
 
     .transition-transform {
@@ -64,19 +72,37 @@
 
             <div class="flex flex-col items-center justify-center w-full gap-8 px-[2px] mt-16 font-semibold h-fit">
                 <x-nav-link href="/dashboard" :active="request()->is('dashboard')">
-                    Dashboard
+                    <span class="nav-icon">
+                        <x-ri-dashboard-fill class="w-10 h-10" />
+                    </span>
+                    <span class="nav-text">Dashboard</span>
                 </x-nav-link>
                 <x-nav-link href="/medicine"
                     :active="request()->is('medicine') || request()->is('*addmedicine') || request()->is('medicine/deduct/*')">
-                    Medicine
+                    <span class="nav-icon">
+                        <x-ri-medicine-bottle-fill class="w-10 h-10" />
+                    </span>
+                    <span class="nav-text">
+                        Medicine
+                    </span>
                 </x-nav-link>
                 <x-nav-link href="/equipments" :active="request()->is('equipments')">
-                    Equipments
+                    <span class="nav-icon">
+                        <x-eos-inventory class="w-10 h-10" />
+                    </span>
+                    <span class="nav-text">
+                        Equipments
+                    </span>
                 </x-nav-link>
                 @auth
                 @if(auth()->user()->type === 'admin')
                 <x-nav-link href="/account" :active="request()->is('account') || request()->is('account/register')">
-                    Accounts
+                    <span class="nav-icon">
+                        <x-gmdi-manage-accounts class="w-10 h-10" />
+                    </span>
+                    <span class="nav-text">
+                        Accounts
+                    </span>
                 </x-nav-link>
 
                 @endif
@@ -87,9 +113,14 @@
                 @csrf
                 @method("POST")
                 <button
-                    class="text-[#FD7E14] border-2 border-[#FD7E14] w-full rounded-lg py-2 hover:bg-[#FD7E14] hover:text-white font-bold overflow-hidden whitespace-nowrap"
+                    class="text-[#FD7E14] border-2 border-[#FD7E14] w-full rounded-lg py-2 hover:bg-[#FD7E14] hover:text-white font-bold"
                     type="submit">
-                    Log Out
+                    <span class="nav-icon">
+                        <x-hugeicons-logout-04 class="w-10 h-10" />
+                    </span>
+                    <span class="nav-text">
+                        Log Out
+                    </span>
                 </button>
             </form>
         </nav>
