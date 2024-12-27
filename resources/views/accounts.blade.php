@@ -10,22 +10,22 @@
 
         <!-- Search and Filter Section -->
         <div class="w-full flex items-center gap-9">
-            <select class="bg-transparent outline-none border border-[#707070] rounded-lg bg-white px-2 py-1 text-center">
+            <select
+                class="bg-transparent outline-none border border-[#707070] rounded-lg bg-white px-2 py-1 text-center">
                 <option value="volvo" hidden>10</option>
                 <option value="saab">1</option>
                 <option value="opel">2</option>
                 <option value="audi">3</option>
             </select>
 
-            <div class="flex flex-row w-fit h-fit border border-[#707070] rounded-3xl bg-white px-2 items-center">
-                <form action="{{ route('accounts.create') }}" method="GET">
-                    <input class="bg-transparent outline-none px-2" type="text" name="query"
-                        value="{{ request('query') }}" placeholder="Search users...">
-                    <button class="border-l-2 p-1" type="submit">
-                        <x-css-search />
-                    </button>
-                </form>
-            </div>
+            <form class="flex flex-row w-fit h-fit border border-[#707070] rounded-3xl bg-white px-2 items-center"
+                action="{{ route('accounts.create') }}" method="GET">
+                <input class="bg-transparent outline-none px-2" type="text" name="query" value="{{ request('query') }}"
+                    placeholder="Search users...">
+                <button class="border-l-2 p-1" type="submit">
+                    <x-css-search />
+                </button>
+            </form>
         </div>
 
         <!-- Users Table -->
@@ -45,16 +45,17 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ ucfirst($user->type) }}</td>
                     <td class="relative flex justify-center gap-4">
-                        {{-- <a href="{{ route('accounts.edit', $user->id) }}" class="hover:underline"> --}}
-                            <x-mdi-pencil class="text-blue-500 w-7 h-7" />
+                        {{-- <a href="{{ route('accounts.edit', $user->id) }}" class="hover:underline cursor-pointer">
+                        --}}
+                        <x-mdi-pencil class="text-blue-500 w-7 h-7" />
                         {{-- </a> --}}
                         {{-- <form action="{{ route('accounts.delete', $user->id) }}" method="POST"
-                            onsubmit="return confirm('Are you sure you want to delete this user?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">
-                                <x-mdi-minus-box-outline class="text-red-400 w-7 h-7" />
-                            </button>
+                        onsubmit="return confirm('Are you sure you want to delete this user?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">
+                            <x-mdi-minus-box-outline class="text-red-400 w-7 h-7" />
+                        </button>
                         </form> --}}
                     </td>
                 </tr>

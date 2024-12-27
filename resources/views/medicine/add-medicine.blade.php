@@ -7,7 +7,7 @@
                 @csrf
                 @method("POST")
 
-                <div class="flex flex-col gap-10">
+                <div class="flex flex-col gap-10 w-72">
                     <div class="flex flex-col gap-1">
                         <label for="name" class="font-bold">Product Name</label>
                         <input id="name" name="m_name" type="text"
@@ -20,7 +20,7 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-10">
+                <div class="flex flex-col gap-10 w-72">
                     <div class="flex flex-col gap-1">
                         <label for="stock" class="font-bold">Product Stock</label>
                         <input id="stock" name="m_stock" type="number"

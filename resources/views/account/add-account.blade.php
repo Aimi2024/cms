@@ -1,6 +1,6 @@
 <x-layout>
     <div class="w-full h-dvh flex flex-col gap-10 p-10 overflow-hidden">
-        <h1 class="font-bold text-[clamp(0.9rem,5vw,3.5rem)] text-left">Create Account</h1>
+        <h1 class="font-bold text-[clamp(0.9rem,5vw,3.5rem)]">Create Account</h1>
 
         <!-- Display a success message if available -->
         @if(session('success'))
@@ -25,7 +25,7 @@
                 @csrf
                 @method("POST")
 
-                <div class="flex flex-col gap-10">
+                <div class="flex flex-col gap-10 w-72">
                     <div class="flex flex-col gap-1">
                         <label for="name" class="font-bold">Account Username</label>
                         <input id="name" name="name" type="text"
@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-10">
+                <div class="flex flex-col gap-10 w-72">
                     <div class="flex flex-col gap-1">
                         <label for="Password" class="font-bold">Account Password</label>
                         <input id="Password" name="password" type="password"
