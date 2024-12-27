@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ mix('css/style.css') }}" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
     @vite('resources/css/style.css')
 
     @vite('resources/css/app.css')
@@ -118,6 +120,73 @@
         } else {
             arrowIcon.style.transform = 'rotate(0deg)';
         }
+    }
+
+    // chart 1
+
+    var xValues = ["0", "1", "2", "3", "4", "5"];
+    var yValues = [55, 49, 44, 24, 15];
+    var barColors = ["red", "red", "red", "red", "red"];
+
+    new Chart("myChart1", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            title: {
+                display: true,
+                text: ""
+            }
+        }
+    });
+
+    // chart 2
+
+    window.onload = function() {
+
+        var chart = new CanvasJS.Chart("myChart2", {
+            animationEnabled: true,
+            title: {
+                text: ""
+            },
+            data: [{
+                type: "pie",
+                startAngle: 240,
+                yValueFormatString: "##0.00\"%\"",
+                indexLabel: "{label} {y}",
+                dataPoints: [{
+                        y: 79.45,
+                        label: "Condom"
+                    },
+                    {
+                        y: 7.31,
+                        label: "Dildo"
+                    },
+                    {
+                        y: 7.06,
+                        label: "Vibrator"
+                    },
+                    {
+                        y: 4.91,
+                        label: "Anal toys"
+                    },
+                    {
+                        y: 1.26,
+                        label: "Harnesses"
+                    }
+                ]
+            }]
+        });
+        chart.render();
+
     }
     </script>
 
