@@ -32,12 +32,11 @@
 
     /* side nav */
     #mySidenav {
-        transition: max-width 0.3s ease, padding 0.3s ease;
-        max-width: 288px;
+        transition: all 0.5s;
     }
 
     #mySidenav.collapsed {
-        max-width: 85px;
+        width: 85px;
     }
 
     #mySidenav.collapsed .nav-text {
