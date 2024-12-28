@@ -1,10 +1,13 @@
 <x-layout>
     <div class="w-full h-dvh flex flex-col px-10 py-8 gap-5">
-        <div class="w-full flex flex-row items-center justify-end pr-10">
-            <a href="" class="border border-[#707070] p-1">
-                <x-typ-plus class="w-6 h-6 text-[#FD7E14]" />
+
+        <div class="w-full h-20 flex flex-row items-center justify-end pr-10">
+            <a href="{{ route('medicine.add') }}"
+                class="border border-[#707070] p-1 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300">
+                <x-typ-plus class="w-6 h-6" />
             </a>
         </div>
+
         <div class="w-full flex items-center gap-9">
             <div class="flex flex-row w-fit h-fit border border-[#707070] rounded-lg bg-white py-1 px-2 items-center">
                 <input class="bg-transparent outline-none px-1" type="text">
@@ -30,7 +33,8 @@
                     placeholder="Select date">
             </div>
 
-            <button class="bg-[#FD7E14] rounded-lg py-1 px-4 text-white">
+            <button
+                class="transition-all duration-300 bg-[#FD7E14] rounded-lg py-1 px-4 text-white hover:bg-white hover:text-black hover:border hover:border-[#707070]">
                 Apply filter
             </button>
 

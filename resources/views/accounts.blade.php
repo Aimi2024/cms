@@ -2,7 +2,7 @@
     <div class="w-full h-dvh flex flex-col px-10 py-8 gap-5">
         <div class="w-full flex flex-row items-center justify-end pr-10 h-5">
             <a href="{{ route('accounts.register') }}"
-                class="hover:border hover:border-[#707070] hover:bg-white bg-[#FD7E14] px-3 py-2 flex items-start gap-3 rounded-3xl hover:text-[#FD7E14] text-white">
+                class="hover:border hover:border-[#707070] hover:bg-white bg-[#FD7E14] px-3 py-2 flex items-start gap-3 rounded-3xl hover:text-[#FD7E14] text-white transition-all duration-300">
                 <x-typ-plus class="w-6 h-6" />
                 ADD NEW
             </a>
@@ -44,10 +44,10 @@
                     <td>{{ $user->username }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ ucfirst($user->type) }}</td>
-                    <td class="relative flex justify-center gap-4">
-                        {{-- <a href="{{ route('accounts.edit', $user->id) }}" class="hover:underline cursor-pointer">
+                    <td class="relative">
+                        {{-- <a href="{{ route('accounts.edit', $user->id) }}" class="hover:underline">
                         --}}
-                        <x-mdi-pencil class="text-blue-500 w-7 h-7" />
+                        <x-mdi-pencil class="text-blue-500 w-7 h-7 cursor-pointer absolute inset-0 m-auto" />
                         {{-- </a> --}}
                         {{-- <form action="{{ route('accounts.delete', $user->id) }}" method="POST"
                         onsubmit="return confirm('Are you sure you want to delete this user?');">
