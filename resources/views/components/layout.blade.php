@@ -30,12 +30,14 @@
         padding: 15px;
     }
 
+    /* side nav */
     #mySidenav {
-        transition: all 0.3s;
+        transition: max-width 0.3s ease, padding 0.3s ease;
+        max-width: 288px;
     }
 
     #mySidenav.collapsed {
-        width: 80px;
+        max-width: 85px;
     }
 
     #mySidenav.collapsed .nav-text {
@@ -52,73 +54,103 @@
 
     .nav-text {
         display: inline;
+        width: 100%;
     }
 
     .transition-transform {
         transition: transform 0.3s ease-in-out;
     }
+
+    #arrowIcon {
+        transition: transform 0.3s ease;
+    }
     </style>
 </head>
 
 <body>
+    @props(['active' => false])
+
     <div class="flex flex-row w-screen h-dvh font-poppins bg-[#E6F7F9]">
 
         <nav id="mySidenav"
-            class="relative overflow-hidden w-72 h-dvh flex flex-col bg-[#FDF6EC] px-10 py-12 border-r rounded-r-3xl justify-between transition-all duration-300">
+            class="relative overflow-hidden w-72 h-dvh flex flex-col bg-[#FDF6EC] px-10 py-12 border-r rounded-r-3xl justify-between items-center transition-all duration-300">
 
             <button id="toggleButton" onclick="toggleNav()" class="absolute top-6 right-8 w-7 h-7">
                 <x-uni-left-arrow-from-left-o id="arrowIcon" class="transition-transform duration-300" />
             </button>
 
             <div class="flex flex-col items-center justify-center w-full gap-8 px-[2px] mt-16 font-semibold h-fit">
-                <x-nav-link href="/dashboard" :active="request()->is('dashboard')">
-                    <span class="nav-icon">
 
+                <a href="/dashboard" :active="request()->is('dashboard')" class="w-full flex justify-center"
+                    aria-current="{{ $active ? 'page' : 'false' }}" {{ $attributes }}>
+                    <span class="flex-none nav-icon w-10 h-10 hover:scale-110">
+                        <img src="{{ asset('dashboard.svg') }}" alt="dashboard">
                     </span>
-                    <span class="nav-text">Dashboard</span>
-                </x-nav-link>
-                <x-nav-link href="/medicine"
-                    :active="request()->is('medicine') || request()->is('*addmedicine') || request()->is('medicine/deduct/*')">
-                    <span class="nav-icon">
+                    <span
+                        class="nav-text {{ $active ? 'bg-[#FD7E14] text-white' : 'bg-white hover:bg-[#FD7E14] hover:text-white' }} flex items-center w-full px-3 py-1 rounded-lg h-fit gap-5 text-center">
+                        <x-fas-less-than
+                            class="{{ $active ? 'rotate-180 transition-transform duration-300 shirnk' : '' }} w-5 h-5 " />
+                        Dashboard
+                    </span>
+                </a>
 
+                <a href="/medicine"
+                    :active="request()->is('medicine') || request()->is('*addmedicine') || request()->is('medicine/deduct/*')"
+                    class="w-full flex justify-center" aria-current="{{ $active ? 'page' : 'false' }}"
+                    {{ $attributes }}>
+                    <span class="flex-none nav-icon w-10 h-10 hover:scale-110">
+                        <img src="{{ asset('medicine.svg') }}" alt="medicine" class="">
                     </span>
-                    <span class="nav-text">
+                    <span
+                        class="nav-text {{ $active ? 'bg-[#FD7E14] text-white' : 'bg-white hover:bg-[#FD7E14] hover:text-white' }} flex items-center w-full px-3 py-1 rounded-lg h-fit gap-5 text-center">
+                        <x-fas-less-than
+                            class="{{ $active ? 'rotate-180 transition-transform duration-300 shirnk' : '' }} w-5 h-5 " />
                         Medicine
                     </span>
-                </x-nav-link>
-                <x-nav-link href="/equipments" :active="request()->is('equipments')">
-                    <span class="nav-icon">
+                </a>
 
+                <a href="/equipments" :active="request()->is('equipments')" class="w-full flex justify-center"
+                    aria-current="{{ $active ? 'page' : 'false' }}" {{ $attributes }}>
+                    <span class="flex-none nav-icon w-10 h-10 hover:scale-110">
+                        <img src="{{ asset('equipment.svg') }}" alt="equipment">
                     </span>
-                    <span class="nav-text">
+                    <span
+                        class="nav-text {{ $active ? 'bg-[#FD7E14] text-white' : 'bg-white hover:bg-[#FD7E14] hover:text-white' }} flex items-center w-full px-3 py-1 rounded-lg h-fit gap-5 text-center">
+                        <x-fas-less-than
+                            class="{{ $active ? 'rotate-180 transition-transform duration-300 shirnk' : '' }} w-5 h-5 " />
                         Equipments
                     </span>
-                </x-nav-link>
+                </a>
                 @auth
                 @if(auth()->user()->type === 'admin')
-                <x-nav-link href="/account" :active="request()->is('account') || request()->is('account/register')">
-                    <span class="nav-icon">
-
+                <a href="/account" :active="request()->is('account') || request()->is('account/register')"
+                    class="w-full flex justify-center" aria-current="{{ $active ? 'page' : 'false' }}"
+                    {{ $attributes }}>
+                    <span class="flex-none nav-icon w-10 h-10 hover:scale-110">
+                        <img src="{{ asset('account.svg') }}" alt="account">
                     </span>
-                    <span class="nav-text">
+                    <span
+                        class="nav-text {{ $active ? 'bg-[#FD7E14] text-white' : 'bg-white hover:bg-[#FD7E14] hover:text-white' }} flex items-center w-full px-3 py-1 rounded-lg h-fit gap-5 text-center">
+                        <x-fas-less-than
+                            class="{{ $active ? 'rotate-180 transition-transform duration-300 shirnk' : '' }} w-5 h-5 " />
                         Accounts
                     </span>
-                </x-nav-link>
+                </a>
 
                 @endif
                 @endauth
 
             </div>
-            <form method="POST" action="/logout">
+
+            <form class="w-full" method="POST" action="/logout">
                 @csrf
                 @method("POST")
-                <button
-                    class="text-[#FD7E14] border-2 border-[#FD7E14] w-full rounded-lg py-2 hover:bg-[#FD7E14] hover:text-white font-bold"
-                    type="submit">
-                    <span class="nav-icon">
-
+                <button class="w-full flex justify-center " type="submit">
+                    <span class="flex-none nav-icon w-10 h-10 hover:scale-110">
+                        <img src="{{ asset('logout.svg') }}" alt="logout">
                     </span>
-                    <span class="nav-text">
+                    <span
+                        class="nav-text text-[#FD7E14] border-2 border-[#FD7E14] rounded-lg py-2 hover:bg-[#FD7E14] hover:text-white font-bold">
                         Log Out
                     </span>
                 </button>
