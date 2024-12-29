@@ -1,6 +1,6 @@
 <x-layout>
 
-    <div class="w-full flex flex-col gap-10 h-dvh px-32 py-12">
+    <div class="w-full flex flex-col gap-10 h-dvh px-32 py-12 overflow-hidden">
 
         <div class="flex flex-row gap-8">
 
