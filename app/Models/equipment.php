@@ -6,6 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class equipment extends Model
 {
+    // Set the table name (optional if it matches the default plural form)
     protected $table = "equipment";
-protected $fillable = ['eq_id','eq_name',"eq_da"];
+    protected $primaryKey = 'eq_id';
+
+    // Allow mass assignment for specific fields
+    protected $fillable = [
+        'eq_name',
+        'eq_da',
+        'stock',
+        'expiration_da',
+        'service_life_end'
+    ];
 }

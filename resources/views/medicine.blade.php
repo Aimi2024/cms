@@ -77,7 +77,7 @@
                         </a>
 
                         <!-- Delete Medicine Action -->
-                        <form action="{{ route('medicine.destroy', $medicine->m_id) }}" method="POST" class="inline-block ml-2" onsubmit="return confirmDelete()">
+                        <form action="{{ route('medicine.delete', $medicine->m_id) }}" method="POST" class="inline-block ml-2" onsubmit="return confirmDelete()">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-red-500 hover:text-red-700">

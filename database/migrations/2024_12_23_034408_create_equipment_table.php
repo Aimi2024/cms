@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('equipment', function (Blueprint $table) {
             $table->id("eq_id");  // Unique ID for each equipment item
             $table->string("eq_name");  // Name of the equipment
+            $table->date("eq_da")->nullable();
             $table->integer("stock")->default(0);  // Quantity of the equipment
-            $table->date("expiration_date")->nullable();  // Expiration date for consumable items (nullable)
+            $table->date("expiration_da")->nullable();  // Expiration date for consumable items (nullable)
             $table->date("service_life_end")->nullable();  // End of service life for durable items (nullable)
             $table->timestamps();  // Created and updated timestamps
         });

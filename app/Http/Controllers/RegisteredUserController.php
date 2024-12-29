@@ -107,4 +107,39 @@ class RegisteredUserController extends Controller
         session()->flash('success', 'Account for ' . $user->username . ' has been created successfully!');
         return redirect()->route('accounts.register');
     }
+
+    public function edit(User $user)
+    {
+        // Only admins can edit accounts
+        if (Auth::user()->type !== 'admin') {
+            return redirect()->route('dashboard')->with('error', 'Unauthorized.');
+        }
+
+        return view('account.update_account', compact('user'));
+    }
+
+    // Update user method
+    public function update(Request $request, User $user)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:users,username,' . $user->id],
+            'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'type' => ['required', 'string'],
+        ]);
+
+        // Update user details
+        $user->update([
+            'username' => $request->name,
+            'email' => $request->email,
+            'type' => $request->type,
+            'password' => $request->password ? Hash::make($request->password) : $user->password,
+        ]);
+
+        return redirect()->route('accounts.create')->with('success', 'Account updated successfully!');
+    }
 }
+
+
+
+

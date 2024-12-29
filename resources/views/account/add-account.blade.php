@@ -1,6 +1,6 @@
 <x-layout>
     <div class="w-full h-dvh flex flex-col gap-10 p-10 overflow-hidden">
-        <h1 class="font-bold text-[clamp(0.9rem,5vw,3.5rem)]">Create Account</h1>
+        <h1 class="font-bold text-[clamp(0.9rem,5vw,3.5rem)]">   Account</h1>
 
         <!-- Display a success message if available -->
         @if(session('success'))
