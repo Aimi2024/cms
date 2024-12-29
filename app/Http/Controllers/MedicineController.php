@@ -68,11 +68,35 @@ class MedicineController extends Controller
             'deduct_quantity' => 'required|integer|min:1|max:' . $medicine->m_stock,
         ]);
 
+        // Deduct from the medicine stock
         $medicine->m_stock -= $request->deduct_quantity;
         $medicine->m_stock = max(0, $medicine->m_stock);
+        $medicine->m_da;
         $medicine->save();
+
+        // Create a new entry in the DeductedMedicine table
+        \App\Models\DeductedMedicine::create([
+            'medicine_name' => $medicine->m_name,
+            'quantity_deducted' => $request->deduct_quantity,
+            'deducted_at' => now(), // Current timestamp
+            'created_at' =>$medicine->m_da
+
+        ]);
 
         return redirect()->route('medicine.index')
             ->with('success', $medicine->m_name.' stock deducted successfully!');
     }
+    public function destroy($id)
+    {
+        $medicine = Medicine::findOrFail($id);
+        $medicineName = $medicine->m_name; // Get the medicine name
+
+        $medicine->delete();
+
+        return redirect()->route('medicine.index')
+            ->with('success', 'Medicine "' . $medicineName . '" deleted successfully.');
+    }
+
+
+
 }

@@ -12,7 +12,7 @@ class SessionController extends Controller
     public function create(Request $request)
     {
         if (Auth::check()) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard.index');
         }
 
         // Prevent caching of the sign-in page
@@ -42,7 +42,8 @@ class SessionController extends Controller
         $request->session()->regenerate();
 
         // Redirect to the intended page or the default index page
-        return redirect()->intended(route('dashboard'));
+        return redirect()->intended(route('dashboard.index'));
+
     }
 
     // Handle logout

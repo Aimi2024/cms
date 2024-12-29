@@ -1,16 +1,16 @@
 <x-layout>
-    <div class="w-full h-dvh flex flex-col px-10 py-8 gap-5">
+    {{-- <div class="w-full h-dvh flex flex-col px-10 py-8 gap-5">
 <<<<<<< HEAD
         <div class="w-full flex flex-row items-center justify-end pr-10">
             <a href="{{ route('eq.add') }}" class="border border-[#707070] p-1">
                 <x-typ-plus class="w-6 h-6 text-[#FD7E14]" />
-=======
+======= --}}
 
         <div class="w-full h-20 flex flex-row items-center justify-end pr-10">
             <a href="{{ route('medicine.add') }}"
                 class="border border-[#707070] p-1 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300">
                 <x-typ-plus class="w-6 h-6" />
->>>>>>> afc0aaac5522dcc846dce9a7cc2c177b6cdc307f
+
             </a>
         </div>
 

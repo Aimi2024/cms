@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DeductedMedicineController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\RegisteredUserController;
 
@@ -11,19 +12,12 @@ Route::middleware('auth')->group(function () {
 
 // Dashboard route
 // Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
+//     return view('dashboard');})->name('dashboard');
 
 route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard.index');
 
-route::get('/dashboard',[DashboardController::class,'dashboardData'])->name('dashboard.data');
 
 
-
-
-Route::get('/medicine/deductedtable', function () {
-    return view('medicine.deducted-table-medicine');
-});
 
 
 
@@ -47,6 +41,11 @@ Route::get('/equipments/deducttable', function () {
 Route::get('/medicine', [MedicineController::class, 'showAllMedicines'])
     ->name('medicine.index');
 
+    Route::get('/medicine/deductedtable', [DeductedMedicineController::class, 'index'])
+    ->name('medicinededucted.index');
+
+Route::delete('/medicine/deducted/{deductedMedicine}', [DeductedMedicineController::class, 'destroy'])->name('medicine.delete');
+
 // Equipments route
 Route::get('/equipments', function () {
     return view('equipments');
@@ -68,6 +67,8 @@ Route::post('/medicine/addmedicine', [MedicineController::class, 'store'])
 Route::get('/medicine/deduct/{id}', [MedicineController::class, 'showDeductForm'])
     ->name('medicine.deductshow');
 
+    Route::delete('medicine/{id}', [MedicineController::class, 'destroy'])->name('medicine.destroy');
+
 Route::post('/medicine/deduct/{id}', [MedicineController::class, 'deduct'])
     ->name('medicine.deduct');
 
@@ -85,3 +86,5 @@ Route::post('/medicine/deduct/{id}', [MedicineController::class, 'deduct'])
         Route::post('/', [SessionController::class, 'store']);
 
     });
+
+
