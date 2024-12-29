@@ -1,7 +1,7 @@
 <x-layout>
     <div class="w-full h-dvh flex flex-col px-10 py-8 gap-5">
         <div class="w-full flex flex-row items-center justify-end pr-10">
-            <a href="" class="border border-[#707070] p-1">
+            <a href="{{ route('eq.add') }}" class="border border-[#707070] p-1">
                 <x-typ-plus class="w-6 h-6 text-[#FD7E14]" />
             </a>
         </div>

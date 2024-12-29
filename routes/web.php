@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\RegisteredUserController;
 
@@ -8,18 +10,27 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
 
 // Dashboard route
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
+
+route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard.index');
+
+route::get('/dashboard',[DashboardController::class,'dashboardData'])->name('dashboard.data');
+
+
 
 
 Route::get('/medicine/deductedtable', function () {
     return view('medicine.deducted-table-medicine');
 });
 
+
+
 Route::get('/equipments/addequipments', function () {
     return view('equipments.eq-add');
-});
+})->name('eq.add');
+
 
 
 

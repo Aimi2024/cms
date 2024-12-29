@@ -16,19 +16,19 @@
 
             <div
                 class="border flex flex-col items-center bg-white text-red-500 font-extrabold justify-center w-32 h-32 overflow-hidden whitespace-nowrap hover:bg-gray-200">
-                <h1 class="text-4xl">2</h1>
+                <h1 class="text-4xl">{{ $medicineCount }}</h1>
                 <p class="text-sm">LOW STOCK</p>
             </div>
 
             <div
                 class="border flex flex-col items-center bg-white text-green-500 font-extrabold justify-center w-32 h-32 overflow-hidden whitespace-nowrap hover:bg-gray-200">
-                <h1 class="text-4xl">2</h1>
+                <h1 class="text-4xl">{{ $newMedicineCount }}</h1>
                 <p class="text-sm">NEW STOCKS</p>
             </div>
 
             <div
                 class="border flex flex-col items-center bg-white text-black font-extrabold justify-center w-32 h-32 overflow-hidden whitespace-nowrap hover:bg-gray-200">
-                <h1 class="text-4xl">2</h1>
+                <h1 class="text-4xl">{{ $expiredMedicine }}</h1>
                 <p class="text-sm">EXPIRED</p>
             </div>
 
