@@ -84,43 +84,42 @@
                     <span class="nav-text">
                         Dashboard
                     </span>
-                    </x-nav-li>
+                </x-nav-link>
 
-                    <x-nav-link href="/medicine"
-                        :active="request()->is('medicine') || request()->is('*addmedicine') || request()->is('medicine/deduct/*')"
-                        class="w-full flex justify-center">
-                        <span class=" flex-none nav-icon w-10 h-10 hover:scale-110">
-                            <img src="{{ asset('medicine.svg') }}" alt="medicine" class="">
-                        </span>
-                        <span class="nav-text">
-                            Medicine
-                        </span>
-                    </x-nav-link>
+                <x-nav-link href="/medicine"
+                    :active="request()->is('medicine') || request()->is('*addmedicine') || request()->is('medicine/deduct/*')"
+                    class="w-full flex justify-center">
+                    <span class=" flex-none nav-icon w-10 h-10 hover:scale-110">
+                        <img src="{{ asset('medicine.svg') }}" alt="medicine" class="">
+                    </span>
+                    <span class="nav-text">
+                        Medicine
+                    </span>
+                </x-nav-link>
 
-                    <x-nav-link href="/equipments" :active="request()->is('equipments')"
-                        class="w-full flex justify-center">
-                        <span class="flex-none nav-icon w-10 h-10 hover:scale-110">
-                            <img src="{{ asset('equipment.svg') }}" alt="equipment">
-                        </span>
-                        <span class="nav-text">
-                            Equipments
-                        </span>
-                    </x-nav-link>
-                    @auth
-                    @if(auth()->user()->type === 'admin')
-                    <x-nav-link href="/account" :active="request()->is('account') || request()->is('account/register')"
-                        class="w-full flex justify-center" aria-current="{{ $active ? 'page' : 'false' }}"
-                        {{ $attributes }}>
-                        <span class="flex-none nav-icon w-10 h-10 hover:scale-110">
-                            <img src="{{ asset('account.svg') }}" alt="account">
-                        </span>
-                        <span class="nav-text">
-                            Accounts
-                        </span>
-                    </x-nav-link>
+                <x-nav-link href="/equipments" :active="request()->is('equipments')" class="w-full flex justify-center">
+                    <span class="flex-none nav-icon w-10 h-10 hover:scale-110">
+                        <img src="{{ asset('equipment.svg') }}" alt="equipment">
+                    </span>
+                    <span class="nav-text">
+                        Equipments
+                    </span>
+                </x-nav-link>
+                @auth
+                @if(auth()->user()->type === 'admin')
+                <x-nav-link href="/account" :active="request()->is('account') || request()->is('account/register')"
+                    class="w-full flex justify-center" aria-current="{{ $active ? 'page' : 'false' }}"
+                    {{ $attributes }}>
+                    <span class="flex-none nav-icon w-10 h-10 hover:scale-110">
+                        <img src="{{ asset('account.svg') }}" alt="account">
+                    </span>
+                    <span class="nav-text">
+                        Accounts
+                    </span>
+                </x-nav-link>
 
-                    @endif
-                    @endauth
+                @endif
+                @endauth
 
             </div>
 

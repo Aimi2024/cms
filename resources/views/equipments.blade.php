@@ -1,16 +1,15 @@
 <x-layout>
-    {{-- <div class="w-full h-dvh flex flex-col px-10 py-8 gap-5">
-<<<<<<< HEAD
-        <div class="w-full flex flex-row items-center justify-end pr-10">
-            <a href="{{ route('eq.add') }}" class="border border-[#707070] p-1">
-                <x-typ-plus class="w-6 h-6 text-[#FD7E14]" />
-======= --}}
+    <div class="w-full h-dvh flex flex-col px-10 py-8 gap-5">
 
-        <div class="w-full h-20 flex flex-row items-center justify-end pr-10">
-            <a href="{{ route('medicine.add') }}"
-                class="border border-[#707070] p-1 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300">
+        <div class="w-full h-20 flex flex-row items-center justify-end gap-8 pr-10">
+            <a href=""
+                class="border border-[#707070] py-1 px-3 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300 rounded-2xl">
+                Deducted Stock
+            </a>
+
+            <a href="{{ route('medicine.add') }}" class="border border-[#707070] w-8 h-8 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition
+    duration-300 rounded-lg flex justify-center items-center">
                 <x-typ-plus class="w-6 h-6" />
-
             </a>
         </div>
 
@@ -21,13 +20,6 @@
                     <x-css-search />
                 </button>
             </div>
-
-            <select class="bg-transparent outline-none border border-[#707070] rounded-lg bg-white py-1 px-2">
-                <option value="volvo" hidden>TYPE OF EQUIPMENT</option>
-                <option value="saab">Lorem</option>
-                <option value="opel">Lorem</option>
-                <option value="audi">Lorem</option>
-            </select>
 
             <div class="flex items-center gap-3 w-fit bg-white border border-[#707070] py-1 px-2 rounded-lg">
                 <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"

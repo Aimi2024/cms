@@ -7,31 +7,28 @@
         </div>
         @endif
 
-        <div class="w-full h-20 flex flex-row items-center justify-end pr-10">
+        <div class="w-full h-20 flex flex-row items-center justify-end gap-8 pr-10">
+            <a href=""
+                class="border border-[#707070] py-1 px-3 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300 rounded-2xl">
+                Deducted Medicine
+            </a>
+
             <a href="{{ route('medicine.add') }}"
-                class="border border-[#707070] p-1 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300">
+                class="border border-[#707070] w-8 h-8 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300 rounded-lg flex justify-center items-center">
                 <x-typ-plus class="w-6 h-6" />
             </a>
         </div>
 
         <!-- Search & Filter Section -->
         <div class="w-full flex items-center gap-9">
-            <form
-                class="flex flex-row w-fit h-fit border border-[#707070] rounded-lg bg-white py-1 px-2 items-center"
+            <form class="flex flex-row w-fit h-fit border border-[#707070] rounded-lg bg-white py-1 px-2 items-center"
                 action="{{ route('medicine.index') }}" method="GET">
-                <input class="bg-transparent outline-none px-1" name="query" type="text"
-                    value="{{ request('query') }}" placeholder="Search medicine...">
+                <input class="bg-transparent outline-none px-1" name="query" type="text" value="{{ request('query') }}"
+                    placeholder="Search medicine...">
                 <button type="submit">
                     <x-css-search />
                 </button>
             </form>
-
-            <select class="bg-transparent outline-none border border-[#707070] rounded-lg bg-white py-1 px-2">
-                <option value="volvo" hidden>TYPE OF MEDICINE</option>
-                <option value="saab">Lorem</option>
-                <option value="opel">Lorem</option>
-                <option value="audi">Lorem</option>
-            </select>
 
             <button
                 class="transition-all duration-300 bg-[#FD7E14] rounded-lg py-1 px-4 text-white hover:bg-white hover:text-black hover:border hover:border-[#707070]"
@@ -77,7 +74,8 @@
                         </a>
 
                         <!-- Delete Medicine Action -->
-                        <form action="{{ route('medicine.destroy', $medicine->m_id) }}" method="POST" class="inline-block ml-2" onsubmit="return confirmDelete()">
+                        <form action="{{ route('medicine.destroy', $medicine->m_id) }}" method="POST"
+                            class="inline-block ml-2" onsubmit="return confirmDelete()">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-red-500 hover:text-red-700">
@@ -98,8 +96,8 @@
 
     <!-- JavaScript for confirmation -->
     <script>
-        function confirmDelete() {
-            return confirm('Are you sure you want to delete this medicine?');
-        }
+    function confirmDelete() {
+        return confirm('Are you sure you want to delete this medicine?');
+    }
     </script>
 </x-layout>

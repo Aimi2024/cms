@@ -86,5 +86,3 @@ Route::post('/medicine/deduct/{id}', [MedicineController::class, 'deduct'])
         Route::post('/', [SessionController::class, 'store']);
 
     });
-
-
