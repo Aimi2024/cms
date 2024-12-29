@@ -1,10 +1,10 @@
 <x-layout>
     <div class="w-full h-dvh flex flex-col px-10 py-8 gap-5">
-<<<<<<< HEAD
+{{-- <<<<<<< HEAD --}}
         <div class="w-full h-20 flex flex-row items-center justify-end pr-10">
             <a href="{{ route('equipment.add') }}"
                 class="border border-[#707070] p-1 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300">
-=======
+{{-- =======
 
         <div class="w-full h-20 flex flex-row items-center justify-end gap-8 pr-10">
             <a href=""
@@ -14,7 +14,7 @@
 
             <a href="{{ route('medicine.add') }}" class="border border-[#707070] w-8 h-8 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition
     duration-300 rounded-lg flex justify-center items-center">
->>>>>>> 4e26aabcb5579dde82ac77d531ab38a0f970c073
+>>>>>>> 4e26aabcb5579dde82ac77d531ab38a0f970c073 --}}
                 <x-typ-plus class="w-6 h-6" />
             </a>
         </div>
@@ -27,9 +27,9 @@
                 </button>
             </div>
 
-<<<<<<< HEAD
+{{-- <<<<<<< HEAD --}}
             <button class="transition-all duration-300 bg-[#FD7E14] rounded-lg py-1 px-4 text-white hover:bg-white hover:text-black hover:border hover:border-[#707070]">
-=======
+{{-- =======
             <div class="flex items-center gap-3 w-fit bg-white border border-[#707070] py-1 px-2 rounded-lg">
                 <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -42,7 +42,7 @@
 
             <button
                 class="transition-all duration-300 bg-[#FD7E14] rounded-lg py-1 px-4 text-white hover:bg-white hover:text-black hover:border hover:border-[#707070]">
->>>>>>> 4e26aabcb5579dde82ac77d531ab38a0f970c073
+>>>>>>> 4e26aabcb5579dde82ac77d531ab38a0f970c073 --}}
                 Apply filter
             </button>
         </div>

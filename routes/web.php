@@ -50,16 +50,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 });
 
-<<<<<<< HEAD
-Route::middleware('guest')->group(function () {
-    Route::get('/', [SessionController::class, 'create'])->name('login');
-    Route::post('/', [SessionController::class, 'store']);
-});
-=======
+
 
     Route::middleware('guest')->group(function () {
         Route::get('/', [SessionController::class, 'create'])->name('login');
         Route::post('/', [SessionController::class, 'store']);
 
     });
->>>>>>> 4e26aabcb5579dde82ac77d531ab38a0f970c073
+
