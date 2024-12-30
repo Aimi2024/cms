@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     // Deduct medicine
     Route::get('/medicine/deduct/{id}', [MedicineController::class, 'showDeductForm'])->name('medicine.deductshow');
     Route::post('/medicine/deduct/{id}', [MedicineController::class, 'deduct'])->name('medicine.deduct');
+    Route::delete('/medicine/{id}', [MedicineController::class, 'destroy'])->name('medicine.destroy');
 
     // Account management routes
     Route::get('/accounts/{user}/edit', [RegisteredUserController::class, 'edit'])->name('accounts.edit');
@@ -46,6 +47,11 @@ Route::middleware('auth')->group(function () {
 
     // Logout route
     Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
+});
+
+Route::middleware('guest')->group(function () {
+    Route::get('/', [SessionController::class, 'create'])->name('login');
+    Route::post('/', [SessionController::class, 'store']);
 });
 
     Route::middleware('guest')->group(function () {

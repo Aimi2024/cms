@@ -2,13 +2,15 @@
     <div class="w-full h-dvh flex flex-col px-10 py-8 gap-5">
 
         <div class="w-full h-20 flex flex-row items-center justify-end gap-8 pr-10">
-            <a href=""
+
+            <a href="{{ route('equipment.add') }}"
                 class="border border-[#707070] py-1 px-3 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300 rounded-2xl">
                 Deducted Stock
             </a>
 
-            <a href="{{ route('medicine.add') }}" class="border border-[#707070] w-8 h-8 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition
-    duration-300 rounded-lg flex justify-center items-center">
+            <a href="{{ route('medicine.add') }}" class="border border-[#707070] w-8 h-8 text-[#FD7E14]
+                hover:bg-[#FD7E14] hover:text-white hover:border-none transition
+                duration-300 rounded-lg flex justify-center items-center">
                 <x-typ-plus class="w-6 h-6" />
             </a>
         </div>
@@ -20,6 +22,7 @@
                     <x-css-search />
                 </button>
             </div>
+
             <button class="transition-all duration-300 rounded-lg py-1 px-4 text-white">
                 <div class="flex items-center gap-3 w-fit bg-white border border-[#707070] py-1 px-2 rounded-lg">
                     <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
