@@ -8,7 +8,7 @@
                 Deducted Stock
             </a>
 
-            <a href="{{ route('medicine.add') }}" class="border border-[#707070] w-8 h-8 text-[#FD7E14]
+            <a href="{{ route('equipment.add') }}" class="border border-[#707070] w-8 h-8 text-[#FD7E14]
                 hover:bg-[#FD7E14] hover:text-white hover:border-none transition
                 duration-300 rounded-lg flex justify-center items-center">
                 <x-typ-plus class="w-6 h-6" />
