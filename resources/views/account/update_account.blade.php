@@ -29,7 +29,8 @@
                     <div class="flex flex-col gap-1">
                         <label for="name" class="font-bold">Account Username</label>
                         <input id="name" name="name" type="text"
-                            class="outline-none px-3 py-2 border border-[#707070] rounded-lg" value="{{ $user->username }}">
+                            class="outline-none px-3 py-2 border border-[#707070] rounded-lg"
+                            value="{{ $user->username }}">
                         @error('name')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
@@ -38,18 +39,33 @@
                     <div class="flex flex-col gap-1">
                         <label for="Email" class="font-bold">Email</label>
                         <input id="Email" name="email" type="email"
-                            class="outline-none px-3 py-2 border border-[#707070] rounded-lg"
-                            value="{{ $user->email}}">
+                            class="outline-none px-3 py-2 border border-[#707070] rounded-lg" value="{{ $user->email}}">
                         @error('email')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
+
+                    <div class="flex flex-col gap-1">
+                        <label for="Type" class="font-bold">Account Type</label>
+                        <select id="Type" name="type"
+                            class="bg-transparent px-3 py-2 outline-none border border-[#707070] rounded-lg bg-white">
+                            <option value="volvo" hidden>Account Type</option>
+                            <option value="admin" {{ old('type', $user->type) == 'admin' ? 'selected' : '' }}>Admin
+                            </option>
+                            <option value="user" {{ old('type', $user->type) == 'user' ? 'selected' : '' }}>User
+                            </option>
+                        </select>
+                        @error('type')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
                 </div>
 
-                <div class="flex flex-col gap-10 w-72">
+                <div class="flex flex-col justify-between w-72">
                     <div class="flex flex-col gap-1">
                         <label for="Password" class="font-bold">Account Password</label>
-                        <input id="Password"  name="password" type="password"
+                        <input id="Password" name="password" type="password"
                             class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
                         @error('password')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -65,24 +81,12 @@
                         @enderror
                     </div>
 
-                    <div class="flex flex-col gap-1">
-                        <label for="Type" class="font-bold">Account Type</label>
-                        <select id="Type" name="type"
-                            class="bg-transparent px-3 py-2 outline-none border border-[#707070] rounded-lg bg-white">
-                            <option value="volvo" hidden>Account Type</option>
-                            <option value="admin" {{ old('type', $user->type) == 'admin' ? 'selected' : '' }}>Admin</option>
-                            <option value="user" {{ old('type', $user->type) == 'user' ? 'selected' : '' }}>User</option>
-                        </select>
-                        @error('type')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="flex flex-row gap-5">
+                    <div class="flex flex-row justify-between">
                         <a href="{{ route('accounts.create') }} "
-                            class="border border-[#707070] p-2 w-full bg-white text-center rounded-lg hover:bg-[#FD7E14] hover:text-white hover:border-none flex items-center justify-center">No</a>
+                            class="border border-[#707070] w-32 h-10 bg-white text-center rounded-lg hover:bg-[#FD7E14] hover:text-white hover:border-none flex items-center justify-center">No</a>
                         <button
-                            class="bg-[#FD7E14] text-xs p-2 w-full text-white rounded-lg hover:border hover:border-[#707070] hover:bg-white hover:text-black flex items-center justify-center" type="submit">Update
+                            class="bg-[#FD7E14] text-xs w-32 h-10 text-white rounded-lg hover:border hover:border-[#707070] hover:bg-white hover:text-black flex items-center justify-center"
+                            type="submit">Update
                             Account</button>
                     </div>
                 </div>

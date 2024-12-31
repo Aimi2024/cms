@@ -64,9 +64,8 @@
 </head>
 
 <body>
-    @props(['active' => false])
 
-    <div class="flex flex-row w-screen h-dvh font-poppins bg-[#E6F7F9]">
+    <div class="flex flex-row w-screen h-dvh font-poppins bg-[#E6F7F9] overflow-x-hidden">
 
         <nav id="mySidenav"
             class="relative whitespace-nowrap overflow-hidden w-72 h-dvh flex flex-col bg-[#FDF6EC] px-10 py-12 border-r rounded-r-3xl justify-between items-center transition-all duration-300 collapsed">
@@ -108,8 +107,7 @@
                 @auth
                 @if(auth()->user()->type === 'admin')
                 <x-nav-link href="/account" :active="request()->is('account') || request()->is('account/register')"
-                    class="w-full flex justify-center" aria-current="{{ $active ? 'page' : 'false' }}"
-                    {{ $attributes }}>
+                    class="w-full flex justify-center">
                     <span class="flex-none nav-icon w-10 h-10 hover:scale-110">
                         <img src="{{ asset('account.svg') }}" alt="account">
                     </span>

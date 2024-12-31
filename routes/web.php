@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
 
-
-
     // Dashboard route
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
@@ -51,11 +49,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 });
 
-
+Route::middleware('guest')->group(function () {
+    Route::get('/', [SessionController::class, 'create'])->name('login');
+    Route::post('/', [SessionController::class, 'store']);
+});
 
     Route::middleware('guest')->group(function () {
         Route::get('/', [SessionController::class, 'create'])->name('login');
         Route::post('/', [SessionController::class, 'store']);
 
     });
-
