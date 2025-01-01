@@ -96,7 +96,7 @@
                 </x-nav-link>
 
                 <x-nav-link href="/equipments"
-                    :active="request()->is('equipments') || request()->is('*equipment/add') || request()->is('*equipment/deductedtable')"
+                    :active="request()->is('equipments') || request()->is('*equipment/add') || request()->is('*equipment/deduct/*') || request()->is('*equipment/deductedtable')"
                     class="w-full flex justify-center">
                     <span class="flex-none nav-icon w-10 h-10 hover:scale-110">
                         <img src="{{ asset('equipment.svg') }}" alt="equipment">

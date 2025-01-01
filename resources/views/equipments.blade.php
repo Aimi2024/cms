@@ -50,16 +50,15 @@
                     <td>{{ $equipment->stock }}</td>
                     <td>{{ $equipment->eq_da }}</td>
                     <td>{{ $equipment->service_life_end ?? 'N/A' }}</td>
-                    <td class="flex justify-center items-center gap-3">
-                        <a href="{{ route('equipment.deduct', $equipment->eq_id) }}"
-                            class="flex justify-center items-center">
+                    <td class="relative px-4 py-2">
+                        <a href="{{ route('equipment.deduct', $equipment->eq_id) }}" class="inline-block">
                             <x-mdi-minus-box-outline class="text-red-400 w-7 h-7" />
                         </a>
-                        <form action="{{ route('equipment.destroy', $equipment->eq_id) }}" method="POST" class="inline"
-                            id="delete-form-{{ $equipment->eq_id }}">
+                        <form action="{{ route('equipment.destroy', $equipment->eq_id) }}" method="POST"
+                            class="inline-block ml-2" id="delete-form-{{ $equipment->eq_id }}">
                             @csrf
                             @method('DELETE')
-                            <button type="button" class="flex justify-center items-center"
+                            <button type="button" class="text-red-500 hover:text-red-700"
                                 onclick="confirmDelete({{ $equipment->eq_id }})">
                                 <x-mdi-delete class="text-red-400 w-7 h-7" />
                             </button>

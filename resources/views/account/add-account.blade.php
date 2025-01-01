@@ -84,7 +84,7 @@
                     No
                 </a>
                 <button
-                    class="bg-[#FD7E14] text-xs h-10 px-1 w-full text-white rounded-lg hover:border hover:border-[#707070] hover:bg-white hover:text-black flex items-center justify-center">
+                    class="bg-[#FD7E14] h-10 px-1 w-full text-white rounded-lg hover:border hover:border-[#707070] hover:bg-white hover:text-black flex items-center justify-center">
                     Create Account
                 </button>
             </div>
