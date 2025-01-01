@@ -141,8 +141,14 @@
                 <!-- header -->
                 <div class="flex flex-row items-center justify-between px-20 py-6">
                     <div class="flex flex-row gap-2">
-                        <p>hello</p>
-                        <p>this</p>
+                        <a href="{{ url()->previous() }}" class="text-blue-500 hover:underline flex items-center"
+                            :class="{ 'font-bold': request()->is('medicine') || request()->is('medicine/add') || request()->is('medicine/deduct/*') }">
+                             {{ ucfirst(request()->segment(1) ?? 'Dashboard') }}
+                         </a>
+                         <span>/</span>
+                         <span>
+                             {{ ucfirst(request()->segment(2) ?? 'Overview') }}
+                         </span>
                     </div>
                     <div>
                         @auth
