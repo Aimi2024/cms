@@ -2,7 +2,7 @@
     <div class="w-full h-dvh flex flex-col px-10 py-8 gap-5">
         <div class="w-full h-20 flex flex-row items-center justify-end pr-10">
             <a href="{{ route('medicine.add') }}"
-                class="border border-[#707070] p-1 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300">
+                class="border border-[#707070] w-8 h-8 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300 rounded-lg flex justify-center items-center">
                 <x-typ-plus class="w-6 h-6" />
             </a>
         </div>

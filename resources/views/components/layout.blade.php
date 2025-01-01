@@ -86,7 +86,7 @@
                 </x-nav-link>
 
                 <x-nav-link href="/medicine"
-                    :active="request()->is('medicine') || request()->is('*addmedicine') || request()->is('medicine/deduct/*')"
+                    :active="request()->is('medicine') || request()->is('*addmedicine') || request()->is('*medicine/deductedtable') || request()->is('medicine/deduct/*')"
                     class="w-full flex justify-center">
                     <span class=" flex-none nav-icon w-10 h-10 hover:scale-110">
                         <img src="{{ asset('medicine.svg') }}" alt="medicine" class="">
@@ -96,7 +96,9 @@
                     </span>
                 </x-nav-link>
 
-                <x-nav-link href="/equipments" :active="request()->is('equipments')" class="w-full flex justify-center">
+                <x-nav-link href="/equipments"
+                    :active="request()->is('equipments') || request()->is('*equipment/add') || request()->is('*equipment/deductedtable')"
+                    class="w-full flex justify-center">
                     <span class="flex-none nav-icon w-10 h-10 hover:scale-110">
                         <img src="{{ asset('equipment.svg') }}" alt="equipment">
                     </span>
@@ -106,7 +108,8 @@
                 </x-nav-link>
                 @auth
                 @if(auth()->user()->type === 'admin')
-                <x-nav-link href="/account" :active="request()->is('account') || request()->is('account/register')"
+                <x-nav-link href="/account"
+                    :active="request()->is('account') || request()->is('account/register') || request()->is('accounts/*/edit')"
                     class="w-full flex justify-center">
                     <span class="flex-none nav-icon w-10 h-10 hover:scale-110">
                         <img src="{{ asset('account.svg') }}" alt="account">
@@ -143,18 +146,18 @@
                     <div class="flex flex-row gap-2">
                         <a href="{{ url()->previous() }}" class="text-blue-500 hover:underline flex items-center"
                             :class="{ 'font-bold': request()->is('medicine') || request()->is('medicine/add') || request()->is('medicine/deduct/*') }">
-                             {{ ucfirst(request()->segment(1) ?? 'Dashboard') }}
-                         </a>
-                         <span>/</span>
-                         <span>
-                             {{ ucfirst(request()->segment(2) ?? 'Overview') }}
-                         </span>
+                            {{ ucfirst(request()->segment(1) ?? 'Dashboard') }}
+                        </a>
+                        <span>/</span>
+                        <span>
+                            {{ ucfirst(request()->segment(2) ?? 'Overview') }}
+                        </span>
                     </div>
                     <div>
                         @auth
-                            Hello!, <b> {{ Auth::user()->username }}</b>
+                        Hello, <b> {{ Auth::user()->username }}!</b>
                         @else
-                            Hello, Guest!
+                        Hello, Guest!
                         @endauth
                     </div>
                 </div>
