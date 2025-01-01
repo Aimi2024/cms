@@ -1,9 +1,15 @@
 <x-layout>
     <div class="w-full h-dvh flex flex-col px-10 py-8 gap-5">
 
-        <div class="w-full h-20 flex flex-row items-center justify-end gap-8 pr-10">
+        <!-- Notification Section -->
+        @if(session('success'))
+            <div class="alert alert-success bg-green-500 text-white px-4 py-2 rounded-lg">
+                {{ session('success') }}
+            </div>
+        @endif
 
-            <a href="{{ route('equipment.add') }}"
+        <div class="w-full h-20 flex flex-row items-center justify-end gap-8 pr-10">
+            <a href="{{ route('equipmentdeducted.index') }}"
                 class="border border-[#707070] py-1 px-3 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300 rounded-2xl">
                 Deducted Stock
             </a>
@@ -17,27 +23,20 @@
 
         <div class="w-full flex items-center gap-9">
             <div class="flex flex-row w-fit h-fit border border-[#707070] rounded-lg bg-white py-1 px-2 items-center">
-                <input class="bg-transparent outline-none px-1" type="text" name="query">
-                <button>
-                    <x-css-search />
-                </button>
+                <form action="{{ route('equipment.index') }}" method="GET">
+                    <!-- Search input only -->
+                    <div class="flex items-center">
+                        <form action="{{ route('equipment.index') }}" method="GET" class="flex items-center">
+                            <input class="bg-transparent outline-none px-1 w-40 text-left" type="text" name="query" placeholder="Search..." value="{{ request('query') }}">
+                            <button type="submit" class="flex items-center justify-center p-2">
+                                <x-css-search />
+                            </button>
+                        </form>
+                    </div>
+
+
+                </form>
             </div>
-
-            <button class="transition-all duration-300 rounded-lg py-1 px-4 text-white">
-                <div class="flex items-center gap-3 w-fit bg-white border border-[#707070] py-1 px-2 rounded-lg">
-                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                            d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                    </svg>
-                    <input id="datepicker-format" datepicker type="text" class="outline-none w-24"
-                        placeholder="Select date">
-                </div>
-
-                <button
-                    class="transition-all duration-300 bg-[#FD7E14] rounded-lg py-1 px-4 text-white hover:bg-white hover:text-black hover:border hover:border-[#707070]">
-                    Apply filter
-                </button>
         </div>
 
         <table class="text-center">
@@ -45,7 +44,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Stock</th>
-                    <th>Expiration Date</th>
+                    <th>Date Arrived</th>
                     <th>Service Life End</th> <!-- Added the column for service life end -->
                     <th>Actions</th>
                 </tr>
@@ -57,19 +56,17 @@
                     <td>{{ $equipment->stock }}</td>
                     <td>{{ $equipment->eq_da }}</td>
                     <td>{{ $equipment->service_life_end ?? 'N/A' }}</td>
-                    <!-- Display service life end, or N/A if not set -->
-                    <td class="relative">
-                        <a href="{{ route('equipment.deduct', $equipment->eq_id) }}">
+                    <td class="flex justify-center items-center gap-3">
+                        <a href="{{ route('equipment.deduct', $equipment->eq_id) }}" class="flex justify-center items-center">
                             <x-mdi-minus-box-outline class="text-red-400 w-7 h-7" />
                         </a>
-                        {{-- <form action="{{ route('equipment.destroy', $equipment->eq_id) }}" method="POST"
-                        class="inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">
-                            <x-mdi-delete class="text-red-400 w-7 h-7" />
-                        </button>
-                        </form> --}}
+                        <form action="{{ route('equipment.destroy', $equipment->eq_id) }}" method="POST" class="inline" id="delete-form-{{ $equipment->eq_id }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="flex justify-center items-center" onclick="confirmDelete({{ $equipment->eq_id }})">
+                                <x-mdi-delete class="text-red-400 w-7 h-7" />
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
@@ -77,4 +74,23 @@
         </table>
         {{ $equipments->links() }}
     </div>
+
+    <!-- SweetAlert2 Script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmDelete(equipmentId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You won\'t be able to revert this!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, keep it'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + equipmentId).submit();
+                }
+            });
+        }
+    </script>
 </x-layout>

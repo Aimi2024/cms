@@ -8,7 +8,7 @@
         @endif
 
         <div class="w-full h-20 flex flex-row items-center justify-end gap-8 pr-10">
-            <a href=""
+            <a href="{{ route('medicinededucted.index') }}"
                 class="border border-[#707070] py-1 px-3 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300 rounded-2xl">
                 Deducted Medicine
             </a>
@@ -38,7 +38,7 @@
         </div>
 
         <!-- Medicines Table -->
-        <table class=" w-full mt-6">
+        <table class="w-full mt-6">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -96,9 +96,21 @@
     </div>
 
     <!-- JavaScript for confirmation -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-    function confirmDelete() {
-        return confirm('Are you sure you want to delete this medicine?');
-    }
+        function confirmDelete(equipmentId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You won\'t be able to revert this!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, keep it'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + equipmentId).submit();
+                }
+            });
+        }
     </script>
 </x-layout>

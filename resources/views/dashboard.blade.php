@@ -38,20 +38,14 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
 <script>
-    // Ensure data is passed correctly
-    console.log('Medicine Labels:', @json($medicineLabels));
-    console.log('Medicine Data:', @json($medicineData));
-    console.log('Equipment Labels:', @json($equipmentLabels));
-    console.log('Equipment Data:', @json($equipmentData));
-    console.log('Expired Labels:', @json($expiredLabels));
-    console.log('Expired Data:', @json($expiredData));
-
+    // Pass data to JavaScript for the charts
     const medicineLabels = @json($medicineLabels);
     const medicineData = @json($medicineData);
     const equipmentLabels = @json($equipmentLabels);
     const equipmentData = @json($equipmentData);
-    const expiredLabels = @json($expiredLabels);
-    const expiredData = @json($expiredData);
+
+    const expiredData = [@json($expiredMedicinesCount), @json($expiredEquipmentCount)];
+    const expiredLabels = ['Expired Medicines', 'Expired Equipment'];
 
     // Bar Chart Configuration
     const ctx1 = document.getElementById('barChart').getContext('2d');
@@ -82,19 +76,6 @@
                 },
                 legend: {
                     position: 'top'
-                },
-                datalabels: {
-                    display: true,
-                    color: 'black',
-                    font: {
-                        weight: 'bold',
-                        size: 12 // Adjusted font size
-                    },
-                    anchor: 'end',  // Position the label at the end of the bar
-                    align: 'top',   // Align the label to the top of the bar
-                    formatter: (value, context) => {
-                        return context.chart.data.labels[context.dataIndex]; // Display the product name as the label
-                    }
                 }
             },
             scales: {
@@ -102,8 +83,7 @@
                     beginAtZero: true
                 }
             }
-        },
-        plugins: [ChartDataLabels]
+        }
     });
 
     // Pie Chart Configuration
@@ -113,14 +93,10 @@
         data: {
             labels: expiredLabels,
             datasets: [{
-                label: 'Expired Items',
                 data: expiredData,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.7)',
-                    'rgba(54, 162, 235, 0.7)',
-                    'rgba(255, 206, 86, 0.7)',
-                    'rgba(75, 192, 192, 0.7)',
-                    'rgba(153, 102, 255, 0.7)'
+                    'rgba(255, 99, 132, 0.7)',  // Red for medicines
+                    'rgba(54, 162, 235, 0.7)'   // Blue for equipment
                 ],
                 hoverOffset: 4
             }]
@@ -140,7 +116,10 @@
                     color: 'white',
                     font: {
                         weight: 'bold',
-                        size: 12 // Adjusted font size
+                        size: 14
+                    },
+                    formatter: (value) => {
+                        return value > 0 ? value : '';  // Show only non-zero values
                     }
                 }
             },

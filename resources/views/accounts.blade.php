@@ -21,13 +21,13 @@
 
         <!-- Search and Filter Section -->
         <div class="w-full flex items-center gap-9">
-            <select
+            {{-- <select
                 class="bg-transparent outline-none border border-[#707070] rounded-lg bg-white px-2 py-1 text-center">
                 <option value="volvo" hidden>10</option>
                 <option value="saab">1</option>
                 <option value="opel">2</option>
                 <option value="audi">3</option>
-            </select>
+            </select> --}}
 
             <form class="flex flex-row w-fit h-fit border border-[#707070] rounded-3xl bg-white px-2 items-center"
                 action="{{ route('accounts.create') }}" method="GET">

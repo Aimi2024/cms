@@ -140,9 +140,20 @@
             <div class="w-full h-fit bg-transparent">
                 <!-- header -->
                 <div class="flex flex-row items-center justify-between px-20 py-6">
-                    <div>Navigation Url</div>
-                    <div>Profile</div>
+                    <div class="flex flex-row gap-2">
+                        <p>hello</p>
+                        <p>this</p>
+                    </div>
+                    <div>
+                        @auth
+                            Hello!, <b> {{ Auth::user()->username }}</b>
+                        @else
+                            Hello, Guest!
+                        @endauth
+                    </div>
                 </div>
+
+
             </div>
 
             {{ $slot }}

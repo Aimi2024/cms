@@ -17,7 +17,7 @@
                             class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
                     </div>
                     <div class="flex flex-col gap-1">
-                        <label for="eq_da" class="font-bold">Service Life End Date</label>
+                        <label for="eq_da" class="font-bold">Equipment Date Arrived</label>
                         <input id="eq_da" name="eq_da" type="date" class="outline-none px-3 py-2 border border-[#707070] rounded-lg"
                                value="{{ \Carbon\Carbon::parse($equipment->eq_da)->format('Y-m-d') }}">
                     </div>

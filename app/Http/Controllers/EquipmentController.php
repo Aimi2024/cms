@@ -12,11 +12,22 @@ class EquipmentController extends Controller
     public function showAllEquipments(Request $request)
     {
         $query = $request->input('query');
+        $dateFrom = $request->input('date_from');
+        $dateTo = $request->input('date_to');
 
-        // Fetch equipments with optional search query
+        // Fetch equipments with optional search query and date range
         $equipments = Equipment::when($query, function($queryBuilder) use ($query) {
-            return $queryBuilder->where('eq_name', 'like', "%$query%");
-        })->paginate(10);  // Paginate the results
+            return $queryBuilder->where('eq_name', 'like', "%$query%")
+                ->orWhere('eq_id', 'like', "%$query%")  // Example of another search field, adjust as needed
+                ->orWhere('stock', 'like', "%$query%"); // Search by stock
+        })
+        ->when($dateFrom, function($queryBuilder) use ($dateFrom) {
+            return $queryBuilder->where('eq_da', '>=', $dateFrom);
+        })
+        ->when($dateTo, function($queryBuilder) use ($dateTo) {
+            return $queryBuilder->where('eq_da', '<=', $dateTo);
+        })
+        ->paginate(10);  // Paginate the results
 
         return view('equipments', compact('equipments'));
     }
