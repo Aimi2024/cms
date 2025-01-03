@@ -68,6 +68,18 @@
                         font: {
                             size: 18
                         }
+                    },
+                    datalabels: {
+                        anchor: 'center',  // Position inside the bar
+                        align: 'center',   // Center the value horizontally
+                        color: '#fff',     // White text for contrast
+                        font: {
+                            weight: 'bold',
+                            size: 14
+                        },
+                        formatter: (value) => {
+                            return value;  // Display the raw value
+                        }
                     }
                 },
                 scales: {
@@ -91,7 +103,8 @@
                         }
                     }
                 }
-            }
+            },
+            plugins: [ChartDataLabels]
         });
 
         // Chart 2 - Doughnut Chart for Expired Items
@@ -140,6 +153,7 @@
             plugins: [ChartDataLabels]
         });
     </script>
+
 
 
 
