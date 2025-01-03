@@ -46,10 +46,23 @@
             <tbody>
                 @foreach($equipments as $equipment)
                 <tr>
-                    <td>{{ $equipment->eq_name }}</td>
-                    <td>{{ $equipment->stock }}</td>
-                    <td>{{ $equipment->eq_da }}</td>
-                    <td>{{ $equipment->service_life_end ?? 'N/A' }}</td>
+                    <td
+                    class="px-4 py-2 @if($equipment->stock == 0) line-through decoration-red-500 text-red-500 @elseif($equipment->service_life_end && \Carbon\Carbon::parse($equipment->service_life_end)->isPast()) text-red-500 @endif">
+                    {{ $equipment->eq_name }}
+                </td>
+                <td
+                    class="px-4 py-2 @if($equipment->stock == 0) line-through decoration-red-500 text-red-500 @elseif($equipment->service_life_end && \Carbon\Carbon::parse($equipment->service_life_end)->isPast()) text-red-500 @endif">
+                    {{ $equipment->stock }}
+                </td>
+                <td
+                    class="px-4 py-2 @if($equipment->stock == 0) line-through decoration-red-500 text-red-500 @elseif($equipment->service_life_end && \Carbon\Carbon::parse($equipment->service_life_end)->isPast()) text-red-500 @endif">
+                    {{ $equipment->eq_da }}
+                </td>
+                <td
+                    class="px-4 py-2 @if($equipment->stock == 0) line-through decoration-red-500 text-red-500 @elseif($equipment->service_life_end && \Carbon\Carbon::parse($equipment->service_life_end)->isPast()) text-red-500 @endif">
+                    {{ $equipment->service_life_end ?? 'N/A' }}
+                </td>
+
                     <td class="relative px-4 py-2">
                         <a href="{{ route('equipment.deduct', $equipment->eq_id) }}" class="inline-block">
                             <x-mdi-minus-box-outline class="text-red-400 w-7 h-7" />

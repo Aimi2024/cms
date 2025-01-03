@@ -19,7 +19,8 @@ class EquipmentController extends Controller
         $equipments = Equipment::when($query, function($queryBuilder) use ($query) {
             return $queryBuilder->where('eq_name', 'like', "%$query%")
                 ->orWhere('eq_id', 'like', "%$query%")  // Example of another search field, adjust as needed
-                ->orWhere('stock', 'like', "%$query%"); // Search by stock
+                ->orWhere('stock', 'like', "%$query%")  // Search by stock
+                ->orWhere('service_life_end', 'like', "%$query%"); // Include service_life_end in search
         })
         ->when($dateFrom, function($queryBuilder) use ($dateFrom) {
             return $queryBuilder->where('eq_da', '>=', $dateFrom);
@@ -31,6 +32,7 @@ class EquipmentController extends Controller
 
         return view('equipments', compact('equipments'));
     }
+
 
     /**
      * Show the form to add a new equipment.

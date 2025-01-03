@@ -122,18 +122,18 @@ class RegisteredUserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255', 'unique:users,username,' . $user->id],
-            'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $user->id],
-            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
-            'type' => ['required', 'string'],
+            'name' => ['nullable', 'string', 'max:255', 'unique:users,username,' . $user->id],  // Allow name to be changed
+            'email' => ['nullable', 'email', 'max:255', 'unique:users,email,' . $user->id],  // Allow email to be changed
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],  // Password is optional, only required if provided
+            'type' => ['nullable', 'string'],  // Type is optional
         ]);
 
-        // Update user details
+        // Update user details if fields are provided, otherwise retain the current value
         $user->update([
-            'username' => $request->name,
-            'email' => $request->email,
-            'type' => $request->type,
-            'password' => $request->password ? Hash::make($request->password) : $user->password,
+            'username' => $request->name ?? $user->username,  // Update if 'name' is provided
+            'email' => $request->email ?? $user->email,  // Update if 'email' is provided
+            'type' => $request->type ?? $user->type,  // Update if 'type' is provided
+            'password' => $request->password ? Hash::make($request->password) : $user->password,  // Update password if provided
         ]);
 
         return redirect()->route('accounts.create')->with('success', 'Account updated successfully!');

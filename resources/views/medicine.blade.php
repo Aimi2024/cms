@@ -30,11 +30,7 @@
                 </button>
             </form>
 
-            <button
-                class="transition-all duration-300 bg-[#FD7E14] rounded-lg py-1 px-4 text-white hover:bg-white hover:text-black hover:border hover:border-[#707070]"
-                type="submit">
-                Apply filter
-            </button>
+
         </div>
 
         <!-- Medicines Table -->
@@ -52,21 +48,21 @@
                 @foreach($medicines as $medicine)
                 <tr>
                     <td
-                        class="px-4 py-2 @if($medicine->m_stock == 0 || $medicine->isExpired()) line-through decoration-red-500 text-slate-400  @endif">
-                        {{ $medicine->m_name }}
-                    </td>
-                    <td
-                        class="px-4 py-2 @if($medicine->m_stock == 0 || $medicine->isExpired()) line-through decoration-red-500  text-slate-400  @endif">
-                        {{ $medicine->m_da }}
-                    </td>
-                    <td
-                        class="px-4 py-2 @if($medicine->m_stock == 0 || $medicine->isExpired()) line-through decoration-red-500  text-slate-400  @endif">
-                        {{ $medicine->m_stock }}
-                    </td>
-                    <td
-                        class="px-4 py-2 @if($medicine->m_stock == 0 || $medicine->isExpired()) line-through decoration-red-500  text-slate-400  @endif">
-                        {{ $medicine->m_date_expired }}
-                    </td>
+                    class="px-4 py-2 @if($medicine->m_stock == 0) line-through decoration-red-500 text-red-500 @elseif($medicine->isExpired()) text-red-500 @endif">
+                    {{ $medicine->m_name }}
+                </td>
+                <td
+                    class="px-4 py-2 @if($medicine->m_stock == 0) line-through decoration-red-500 text-red-500 @elseif($medicine->isExpired()) text-red-500 @endif">
+                    {{ $medicine->m_da }}
+                </td>
+                <td
+                    class="px-4 py-2 @if($medicine->m_stock == 0) line-through decoration-red-500 text-red-500 @elseif($medicine->isExpired()) text-red-500 @endif">
+                    {{ $medicine->m_stock }}
+                </td>
+                <td
+                    class="px-4 py-2 @if($medicine->m_stock == 0) line-through decoration-red-500 text-red-500 @elseif($medicine->isExpired()) text-red-500 @endif">
+                    {{ $medicine->m_date_expired }}
+                </td>
                     <td class="relative px-4 py-2">
                         <!-- Deduct Medicine Action -->
                         <a href="{{ route('medicine.deductshow', $medicine->m_id) }}" class="inline-block">

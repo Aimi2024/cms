@@ -149,7 +149,11 @@
                         </a>
                         <span>/</span>
                         <span>
-                            {{ ucfirst(request()->segment(2) ?? 'Overview') }}
+                            @if(request()->is('account/edit/*'))
+                                {{ $user->username ?? 'Account' }}
+                            @else
+                                {{ ucfirst(request()->segment(2) ?? 'Overview') }}
+                            @endif
                         </span>
                     </div>
                     <div>
@@ -183,65 +187,65 @@
         }
     }
 
-    // Chart 1
-    const xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-    const yValues = [55, 49, 44, 24, 15];
-    const barColors = ["red", "green", "blue", "orange", "brown"];
+    // // Chart 1
+    // const xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+    // const yValues = [55, 49, 44, 24, 15];
+    // const barColors = ["red", "green", "blue", "orange", "brown"];
 
-    new Chart("myChart1", {
-        type: "bar",
-        data: {
-            labels: xValues,
-            datasets: [{
-                backgroundColor: barColors,
-                data: yValues
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: ""
-                }
-            }
-        }
-    });
+    // new Chart("myChart1", {
+    //     type: "bar",
+    //     data: {
+    //         labels: xValues,
+    //         datasets: [{
+    //             backgroundColor: barColors,
+    //             data: yValues
+    //         }]
+    //     },
+    //     options: {
+    //         responsive: true,
+    //         maintainAspectRatio: false,
+    //         plugins: {
+    //             legend: {
+    //                 display: false
+    //             },
+    //             title: {
+    //                 display: true,
+    //                 text: ""
+    //             }
+    //         }
+    //     }
+    // });
 
-    // Chart 2
-    const barColors1 = [
-        "#b91d47",
-        "#00aba9",
-        "#2b5797",
-        "#e8c3b9",
-        "#1e7145"
-    ];
+    // // Chart 2
+    // const barColors1 = [
+    //     "#b91d47",
+    //     "#00aba9",
+    //     "#2b5797",
+    //     "#e8c3b9",
+    //     "#1e7145"
+    // ];
 
-    new Chart("myChart2", {
-        type: "doughnut",
-        data: {
-            labels: xValues,
-            datasets: [{
-                backgroundColor: barColors1,
-                data: yValues
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                title: {
-                    display: true,
-                    text: ""
-                }
-            }
-        }
-    });
-    </script>
+    // new Chart("myChart2", {
+    //     type: "doughnut",
+    //     data: {
+    //         labels: xValues,
+    //         datasets: [{
+    //             backgroundColor: barColors1,
+    //             data: yValues
+    //         }]
+    //     },
+    //     options: {
+    //         responsive: true,
+    //         maintainAspectRatio: false,
+    //         plugins: {
+    //             title: {
+    //                 display: true,
+    //                 text: ""
+    //             }
+    //         }
+    //     }
+    // });
+    // </script>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>

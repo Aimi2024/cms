@@ -13,9 +13,11 @@ class MedicineController extends Controller
         $query = $request->input('query');
 
         if ($query) {
-            // Perform search if query is provided
+            // Perform search if query is provided, now including m_name, m_da, m_stock, and m_date_expired
             $medicines = Medicine::where('m_name', 'LIKE', "%{$query}%")
                 ->orWhere('m_da', 'LIKE', "%{$query}%")
+                ->orWhere('m_stock', 'LIKE', "%{$query}%")
+                ->orWhere('m_date_expired', 'LIKE', "%{$query}%")
                 ->paginate(5);
         } else {
             // Show all medicines by default
