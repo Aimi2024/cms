@@ -46,6 +46,7 @@
                     <th>Username</th>
                     <th>Email</th>
                     <th>Type</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -55,6 +56,13 @@
                     <td>{{ $user->username }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ ucfirst($user->type) }}</td>
+                    <td>
+                        @if($user->isOnline())
+                            <span class="badge bg-green-500 text-white px-2 py-1 rounded">Online</span>
+                        @else
+                            <span class="badge bg-gray-400 text-white px-2 py-1 rounded">Offline</span>
+                        @endif
+                    </td>
                     <td class="relative">
                         <a href="{{ route('accounts.edit', ['user' => $user->id]) }}" class="hover:underline">
                             <x-mdi-pencil class="text-blue-500 w-7 h-7 cursor-pointer absolute inset-0 m-auto" />

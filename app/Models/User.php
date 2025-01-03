@@ -6,7 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Carbon\Carbon;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -24,7 +24,15 @@ class User extends Authenticatable
         'email',
         'password',
         'type',
+        'last_seen',
+        'is_online',
     ];
+
+    public function isOnline()
+{
+    return $this->is_online || $this->last_seen?->gt(Carbon::now()->subMinutes(5));
+}
+
 
     /**
      * The attributes that should be hidden for serialization.
