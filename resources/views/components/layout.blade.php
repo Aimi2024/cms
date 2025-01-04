@@ -63,7 +63,9 @@
 </head>
 
 <body>
-
+    <div id="loading-screen" class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-70 z-50 hidden">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid"></div>
+    </div>
     <div class="flex flex-row w-screen h-dvh font-poppins bg-[#E6F7F9] overflow-x-hidden">
 
         <nav id="mySidenav"
@@ -174,78 +176,55 @@
     </div>
 
     <script>
-    function toggleNav() {
-        const sidenav = document.getElementById('mySidenav');
-        const arrowIcon = document.getElementById('arrowIcon');
+        function toggleNav() {
+            const sidenav = document.getElementById('mySidenav');
+            const arrowIcon = document.getElementById('arrowIcon');
 
-        sidenav.classList.toggle('collapsed');
+            sidenav.classList.toggle('collapsed');
 
-        if (sidenav.classList.contains('collapsed')) {
-            arrowIcon.style.transform = 'rotate(180deg)';
-        } else {
-            arrowIcon.style.transform = 'rotate(0deg)';
+            if (sidenav.classList.contains('collapsed')) {
+                arrowIcon.style.transform = 'rotate(180deg)';
+            } else {
+                arrowIcon.style.transform = 'rotate(0deg)';
+            }
         }
-    }
 
-    // // Chart 1
-    // const xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-    // const yValues = [55, 49, 44, 24, 15];
-    // const barColors = ["red", "green", "blue", "orange", "brown"];
+        document.addEventListener('DOMContentLoaded', function () {
+            const loadingScreen = document.getElementById('loading-screen');
 
-    // new Chart("myChart1", {
-    //     type: "bar",
-    //     data: {
-    //         labels: xValues,
-    //         datasets: [{
-    //             backgroundColor: barColors,
-    //             data: yValues
-    //         }]
-    //     },
-    //     options: {
-    //         responsive: true,
-    //         maintainAspectRatio: false,
-    //         plugins: {
-    //             legend: {
-    //                 display: false
-    //             },
-    //             title: {
-    //                 display: true,
-    //                 text: ""
-    //             }
-    //         }
-    //     }
-    // });
+            // Show loading screen on form submit
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function () {
+                    loadingScreen.classList.remove('hidden');
+                    const submitButton = form.querySelector('button[type="submit"]');
+                    if (submitButton) {
+                        submitButton.disabled = true;
+                        submitButton.innerText = 'Processing...';
+                    }
+                });
+            });
 
-    // // Chart 2
-    // const barColors1 = [
-    //     "#b91d47",
-    //     "#00aba9",
-    //     "#2b5797",
-    //     "#e8c3b9",
-    //     "#1e7145"
-    // ];
+            // Show loading screen on link click with data-loading="true"
+            const links = document.querySelectorAll('a[data-loading="true"]');
+            links.forEach(link => {
+                link.addEventListener('click', function () {
+                    loadingScreen.classList.remove('hidden');
+                });
+            });
 
-    // new Chart("myChart2", {
-    //     type: "doughnut",
-    //     data: {
-    //         labels: xValues,
-    //         datasets: [{
-    //             backgroundColor: barColors1,
-    //             data: yValues
-    //         }]
-    //     },
-    //     options: {
-    //         responsive: true,
-    //         maintainAspectRatio: false,
-    //         plugins: {
-    //             title: {
-    //                 display: true,
-    //                 text: ""
-    //             }
-    //         }
-    //     }
-    // });
-    // </script>
+            // Hide loading screen after page load
+            window.addEventListener('load', function () {
+                loadingScreen.classList.add('hidden');
+            });
+
+            // Optional timeout to hide the loader (failsafe)
+            setTimeout(function () {
+                loadingScreen.classList.add('hidden');
+            }, 10000); // 10 seconds timeout
+        });
+    </script>
+
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
