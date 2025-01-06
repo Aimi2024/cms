@@ -189,40 +189,45 @@
             }
         }
 
+
         document.addEventListener('DOMContentLoaded', function () {
-            const loadingScreen = document.getElementById('loading-screen');
+    const loadingScreen = document.getElementById('loading-screen');
 
-            // Show loading screen on form submit
-            const forms = document.querySelectorAll('form');
-            forms.forEach(form => {
-                form.addEventListener('submit', function () {
-                    loadingScreen.classList.remove('hidden');
-                    const submitButton = form.querySelector('button[type="submit"]');
-                    if (submitButton) {
-                        submitButton.disabled = true;
-                        submitButton.innerText = 'Processing...';
-                    }
-                });
-            });
-
-            // Show loading screen on link click with data-loading="true"
-            const links = document.querySelectorAll('a[data-loading="true"]');
-            links.forEach(link => {
-                link.addEventListener('click', function () {
-                    loadingScreen.classList.remove('hidden');
-                });
-            });
-
-            // Hide loading screen after page load
-            window.addEventListener('load', function () {
-                loadingScreen.classList.add('hidden');
-            });
-
-            // Optional timeout to hide the loader (failsafe)
-            setTimeout(function () {
-                loadingScreen.classList.add('hidden');
-            }, 10000); // 10 seconds timeout
+    // Show loading screen on all link clicks
+    const links = document.querySelectorAll('a');
+    links.forEach(link => {
+        link.addEventListener('click', function (event) {
+            // Exclude links with target="_blank" to avoid loading screen for new tabs
+            if (!link.target || link.target === '_self') {
+                loadingScreen.classList.remove('hidden');
+            }
         });
+    });
+
+    // Show loading screen on form submit
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function () {
+            loadingScreen.classList.remove('hidden');
+            const submitButton = form.querySelector('button[type="submit"]');
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.innerText = 'Processing...';
+            }
+        });
+    });
+
+    // Hide loading screen after page load
+    window.addEventListener('load', function () {
+        loadingScreen.classList.add('hidden');
+    });
+
+    // Optional timeout to hide the loader (failsafe)
+    setTimeout(function () {
+        loadingScreen.classList.add('hidden');
+    }, 10000); // 10 seconds timeout
+});
+
     </script>
 
 

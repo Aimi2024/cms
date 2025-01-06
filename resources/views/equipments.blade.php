@@ -3,10 +3,13 @@
 
         <!-- Notification Section -->
         @if(session('success'))
-        <div class="alert alert-success bg-green-500 text-white px-4 py-2 rounded-lg">
+        <div class="alert alert-success bg-green-500 text-white px-4 py-2 rounded-lg relative">
             {{ session('success') }}
+            <button class="absolute top-2 right-2 text-white" onclick="this.parentElement.style.display='none'">
+                <x-mdi-close class="w-6 h-6" />
+            </button>
         </div>
-        @endif
+    @endif
 
         <div class="w-full h-20 flex flex-row items-center justify-end gap-8 pr-10">
             <a href="{{ route('equipmentdeducted.index') }}"

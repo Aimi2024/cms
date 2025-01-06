@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DeductEquipment;
 use Illuminate\Http\Request;
 
-class deductEquipmentController extends Controller
+class DeductEquipmentController extends Controller
 {
 
     public function index(Request $request)

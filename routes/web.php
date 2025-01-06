@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/account', [RegisteredUserController::class, 'create'])->name('accounts.create');
     Route::post('/account', [RegisteredUserController::class, 'store'])->name('accounts.store');
     Route::get('/account/register', [RegisteredUserController::class, 'createAccount'])->name('accounts.register');
-
+    Route::delete('/account/{user}', [RegisteredUserController::class, 'destroy'])->name('accounts.destroy');
     // Logout route
     Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 });

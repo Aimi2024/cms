@@ -6,7 +6,29 @@
                 <x-typ-plus class="w-6 h-6" />
             </a>
         </div>
-        <!-- Search Section -->
+
+        <!-- Flash Message Notification -->
+        @if (session('success'))
+            <script>
+                Swal.fire({
+                    title: 'Success!',
+                    text: "{{ session('success') }}",
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            </script>
+        @elseif (session('error'))
+            <script>
+                Swal.fire({
+                    title: 'Error!',
+                    text: "{{ session('error') }}",
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            </script>
+        @endif
+
+        <!-- Search and Medicine Table Section -->
         <div class="w-full flex items-center gap-9">
             <form action="{{ route('medicinededucted.index') }}" method="GET"
                 class="flex flex-row w-fit h-fit border border-[#707070] rounded-lg bg-white py-1 px-2 items-center">
@@ -16,13 +38,11 @@
                     <x-css-search />
                 </button>
             </form>
-            <!-- Other filter options can be added here -->
-            <button
-                class="transition-all duration-300 bg-[#FD7E14] rounded-lg py-1 px-4 text-white hover:bg-white hover:text-black hover:border hover:border-[#707070]">
+            <button class="transition-all duration-300 bg-[#FD7E14] rounded-lg py-1 px-4 text-white hover:bg-white hover:text-black hover:border hover:border-[#707070]">
                 Apply filter
             </button>
         </div>
-        <!-- Medicines Table -->
+
         <table class="text-center">
             <thead>
                 <tr>
@@ -39,13 +59,12 @@
                     <td>{{ $medicine->medicine_name }}</td>
                     <td>{{ $medicine->created_at }}</td>
                     <td>{{ $medicine->quantity_deducted }}</td>
-                    <td>{{ $medicine->deducted_at }}</td> <!-- Or any related expiration date if needed -->
+                    <td>{{ $medicine->deducted_at }}</td>
                     <td class="relative">
-                        <form action="{{ route('medicine.delete', ['deductedMedicine' => $medicine->id]) }}"
-                            method="POST" onsubmit="return confirm('Are you sure you want to delete this medicine?');">
+                        <form id="delete-form-{{ $medicine->id }}" action="{{ route('medicine.delete', ['deductedMedicine' => $medicine->id]) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-red-400 w-7 h-7">
+                            <button type="button" onclick="confirmDeleteMedicine({{ $medicine->id }})" class="text-red-400 w-7 h-7">
                                 <x-mdi-delete class="w-7 h-7" />
                             </button>
                         </form>
@@ -54,9 +73,28 @@
                 @endforeach
             </tbody>
         </table>
+
         <!-- Pagination Links -->
         <div class="mt-4 flex justify-center">
             {!! $medicinededucted->links() !!}
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmDeleteMedicine(medicineId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You won\'t be able to revert this!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, keep it'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + medicineId).submit();
+                }
+            });
+        }
+    </script>
 </x-layout>

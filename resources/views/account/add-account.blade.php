@@ -6,12 +6,13 @@
         <!-- Display a success message if available -->
         @if(session('success'))
         <div class="bg-green-100 text-green-800 p-4 rounded-lg mb-4 border-l-4 border-green-500 relative">
-            {{ session('success') }}
+            {{ session('success') }} &nbsp;
             <button class="absolute top-2 right-2 text-green-800" onclick="this.parentElement.style.display='none'">
-                <x-mdi-close class="w-6 h-6" />
+                <x-mdi-close class="w-4 h-4" />
             </button>
         </div>
-        @endif
+    @endif
+
 
         <!-- Display a general error message if there are any -->
         @if ($errors->any())

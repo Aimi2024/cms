@@ -45,7 +45,7 @@ class RegisteredUserController extends Controller
 
     if (Auth::check() && Auth::user()->type !== 'admin') {
         // If the user is logged in but is not an admin, redirect them
-        return redirect()->route('dashboard')->with('error', 'You do not have access to this page.');
+        return redirect()->route(route: 'dashboard.index')->with('error', 'You do not have access to this page.');
     }
 
     // Get the search query if it exists
@@ -138,6 +138,24 @@ class RegisteredUserController extends Controller
 
         return redirect()->route('accounts.create')->with('success', 'Account updated successfully!');
     }
+    public function destroy(User $user)
+{
+    // Ensure only admins can delete accounts
+    if (Auth::user()->type !== 'admin') {
+        return redirect()->route('dashboard')->with('error', 'Unauthorized action.');
+    }
+
+    // Prevent deleting the currently authenticated user's account
+    if (Auth::id() === $user->id) {
+        return redirect()->route('accounts.create')->with('error', 'You cannot delete your own account.');
+    }
+
+    // Delete the user account
+    $user->delete();
+
+    // Redirect with a success message
+    return redirect()->route('accounts.create')->with('success', 'Account deleted successfully!');
+}
 }
 
 

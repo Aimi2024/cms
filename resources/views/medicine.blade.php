@@ -2,10 +2,13 @@
     <div class="w-full h-dvh flex flex-col px-10 py-8 gap-5">
         <!-- Success Notification -->
         @if(session('success'))
-        <div class="bg-green-100 text-green-800 p-4 rounded-lg mb-4 border-l-4 border-green-500">
-            {{ session('success') }}
-        </div>
-        @endif
+    <div class="bg-green-100 text-green-800 p-4 rounded-lg mb-4 border-l-4 border-green-500 relative">
+        {{ session('success') }}
+        <button class="absolute top-2 right-2 text-green-800" onclick="this.parentElement.style.display='none'">
+            <x-mdi-close class="w-6 h-6" />
+        </button>
+    </div>
+@endif
 
         <div class="w-full h-20 flex flex-row items-center justify-end gap-8 pr-10">
             <a href="{{ route('medicinededucted.index') }}"
@@ -71,11 +74,11 @@
 
                         <!-- Delete Medicine Action -->
                         <form action="{{ route('medicine.destroy', $medicine->m_id) }}" method="POST"
-                            class="inline-block ml-2" onsubmit="return confirmDelete()">
-
+                            class="inline-block ml-2" id="delete-form-{{ $medicine->m_id }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-red-500 hover:text-red-700">
+                            <button type="button" class="text-red-500 hover:text-red-700"
+                                onclick="confirmDelete({{ $medicine->m_id }})">
                                 <x-mdi-delete class="w-7 h-7" />
                             </button>
                         </form>
@@ -94,7 +97,7 @@
     <!-- JavaScript for confirmation -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        function confirmDelete(equipmentId) {
+        function confirmDelete(medicineId) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: 'You won\'t be able to revert this!',
@@ -104,7 +107,7 @@
                 cancelButtonText: 'No, keep it'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    document.getElementById('delete-form-' + equipmentId).submit();
+                    document.getElementById('delete-form-' + medicineId).submit();
                 }
             });
         }

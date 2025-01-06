@@ -96,7 +96,7 @@
                     x: {
                         title: {
                             display: true,
-                            text: "Items",
+                            text: "Inventory Stocks",
                             font: {
                                 size: 14
                             }

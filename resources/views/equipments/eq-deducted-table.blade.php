@@ -1,5 +1,17 @@
 <x-layout>
     <div class="w-full h-dvh flex flex-col px-10 py-8 gap-5">
+        <!-- Flash Message Notification -->
+        @if (session('success'))
+            <script>
+                Swal.fire({
+                    title: 'Deleted!',
+                    text: "{{ session('success') }}",
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            </script>
+        @endif
+
         <div class="w-full h-20 flex flex-row items-center justify-end pr-10">
             <a href="{{ route('equipment.add') }}"
                 class="border border-[#707070] w-8 h-8 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300 rounded-lg flex justify-center items-center">
@@ -39,18 +51,15 @@
                     <td>{{ $equipment->eqd_stock_deducted }}</td>
                     <td>{{ $equipment->eq_da }}</td>
                     <td>{{ $equipment->eqd_date_deducted ?? 'N/A' }}</td>
-                    <!-- Display service life end, or N/A if not set -->
                     <td class="relative">
 
-                        <form action="{{ route('equipmentdeducted.destroy', $equipment->eqd_id) }}" method="POST"
-                            class="inline">
+                        <form id="delete-form-{{ $equipment->eqd_id }}" action="{{ route('equipmentdeducted.destroy', $equipment->eqd_id) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">
+                            <button type="button" onclick="confirmDelete({{ $equipment->eqd_id }})">
                                 <x-mdi-delete class="text-red-400 w-7 h-7" />
                             </button>
                         </form>
-
                     </td>
                 </tr>
                 @endforeach
@@ -62,4 +71,22 @@
             {{ $equipmentdeducted->links() }}
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    function confirmDelete(equipmentId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-form-' + equipmentId).submit();
+            }
+        });
+    }
+    </script>
 </x-layout>

@@ -17,7 +17,7 @@
 
             <div class="flex flex-col gap-1">
                 <label for="arrived" class="font-bold">Product Date Arrived</label>
-                <input id="arrived" name="m_da" type="date"
+                <input id="arrived" name="m_da" type="date" value="{{ $medicine->m_da }}" readonly
                     class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
                 @error('arrived_date')
                 <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
@@ -25,24 +25,36 @@
             </div>
 
             <div class="flex flex-col">
-                <label for="Stock" class="font-bold">Product Stock</label>
-                <input id="Stock" name="deduct_quantity" type="text"
+                <label for="stock1" class="font-bold">Product Stock</label>
+                <input id="stock1" name="m_stock" type="text" readonly value="{{ $medicine->m_stock }}"
                     class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
-                @error('deduct_quantity')
+                @error('m_stock')
                 <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
                 @enderror
             </div>
 
+
+
+
             <div class="flex flex-col gap-1">
                 <label for="expired" class="font-bold">Product Date Expired</label>
-                <input id="expired" name="m_date_expired" type="date"
+                <input id="expired" name="m_date_expired" type="date" value="{{ $medicine->m_date_expired }}" readonly
                     class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
                 @error('m_date_expired')
                 <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
                 @enderror
             </div>
+            <div class="flex flex-col">
+                <label for="Stock" class="font-bold">Product Deduct Stock</label>
+                <input id="Stock" name="deduct_quantity" type="text"
+                    class="outline-none px-2 py-2 border border-[#707070] rounded-lg">
+                @error('deduct_quantity')
+                <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                @enderror
+            </div>
 
-            <div class="flex flex-row gap-5 mt-5 sm:col-start-2">
+
+            <div class="flex flex-row gap-5 mt-6 sm:col-start-2">
                 <a href="{{route ('medicine.index')}}"
                     class="border border-[#707070] h-10 w-full bg-white text-center rounded-lg hover:bg-[#FD7E14] hover:text-white hover:border-none flex items-center justify-center">No</a>
                 <button
@@ -53,4 +65,5 @@
     </form>
 
     </div>
+    
 </x-layout>
