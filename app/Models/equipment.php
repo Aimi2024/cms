@@ -16,6 +16,12 @@ class equipment extends Model
         'eq_da',
         'stock',
         'expiration_da',
-        'service_life_end'
+        'service_life_end',
+        'added_by',
     ];
+
+    public function addedBy()
+    {
+        return $this->belongsTo(User::class, 'added_by');
+    }
 }

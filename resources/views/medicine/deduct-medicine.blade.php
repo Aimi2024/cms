@@ -36,6 +36,7 @@
 
 
 
+
             <div class="flex flex-col gap-1">
                 <label for="expired" class="font-bold">Product Date Expired</label>
                 <input id="expired" name="m_date_expired" type="date" value="{{ $medicine->m_date_expired }}" readonly
@@ -46,13 +47,21 @@
             </div>
             <div class="flex flex-col">
                 <label for="Stock" class="font-bold">Product Deduct Stock</label>
-                <input id="Stock" name="deduct_quantity" type="text"
+                <input id="Stock" name="deduct_quantity" type="number"
                     class="outline-none px-2 py-2 border border-[#707070] rounded-lg">
                 @error('deduct_quantity')
                 <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
                 @enderror
             </div>
 
+            <div class="flex flex-col">
+                <label for="reason" class="font-bold">Product Deduct Reason</label>
+                <input id="reason" name="deduct_reason" type="text"
+                    class="outline-none px-2 py-2 border border-[#707070] rounded-lg">
+                @error('deduct_reason')
+                <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                @enderror
+            </div>
 
             <div class="flex flex-row gap-5 mt-6 sm:col-start-2">
                 <a href="{{route ('medicine.index')}}"
@@ -65,5 +74,5 @@
     </form>
 
     </div>
-    
+
 </x-layout>

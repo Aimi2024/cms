@@ -16,6 +16,9 @@ return new class extends Migration
         $table->string('medicine_name');
         $table->integer('quantity_deducted');
         $table->date('deducted_at');
+        $table->string('medicine_deduct_reason');
+        $table->unsignedBigInteger('added_by'); // Add the 'added_by' column
+        $table->foreign('added_by')->references('id')->on('users')->onDelete('cascade'); // Foreign key to 'users' table
         $table->timestamps();
     });
 }

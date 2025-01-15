@@ -16,12 +16,15 @@
                 class="border border-[#707070] py-1 px-3 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300 rounded-2xl">
                 Deducted Stock
             </a>
-
+            @auth
+            @if(auth()->user()->type === 'admin')
             <a href="{{ route('equipment.add') }}" class="border border-[#707070] w-8 h-8 text-[#FD7E14]
                 hover:bg-[#FD7E14] hover:text-white hover:border-none transition
                 duration-300 rounded-lg flex justify-center items-center">
                 <x-typ-plus class="w-6 h-6" />
             </a>
+            @endif
+            @endauth
         </div>
 
         <div class="w-full flex h-10 items-center">
@@ -41,6 +44,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Stock</th>
+                    <th>Added By:</th>
                     <th>Date Arrived</th>
                     <th>Service Life End</th> <!-- Added the column for service life end -->
                     <th>Actions</th>
@@ -57,10 +61,12 @@
                     class="px-4 py-2 @if($equipment->stock == 0) line-through decoration-red-500 text-red-500 @elseif($equipment->service_life_end && \Carbon\Carbon::parse($equipment->service_life_end)->isPast()) text-red-500 @endif">
                     {{ $equipment->stock }}
                 </td>
+                <td>{{ $equipment->addedBy->username ?? 'N/A' }}</td>
                 <td
                     class="px-4 py-2 @if($equipment->stock == 0) line-through decoration-red-500 text-red-500 @elseif($equipment->service_life_end && \Carbon\Carbon::parse($equipment->service_life_end)->isPast()) text-red-500 @endif">
                     {{ $equipment->eq_da }}
                 </td>
+
                 <td
                     class="px-4 py-2 @if($equipment->stock == 0) line-through decoration-red-500 text-red-500 @elseif($equipment->service_life_end && \Carbon\Carbon::parse($equipment->service_life_end)->isPast()) text-red-500 @endif">
                     {{ $equipment->service_life_end ?? 'N/A' }}
@@ -70,6 +76,8 @@
                         <a href="{{ route('equipment.deduct', $equipment->eq_id) }}" class="inline-block">
                             <x-mdi-minus-box-outline class="text-red-400 w-7 h-7" />
                         </a>
+                        @auth
+                        @if(auth()->user()->type === 'admin')
                         <form action="{{ route('equipment.destroy', $equipment->eq_id) }}" method="POST"
                             class="inline-block ml-2" id="delete-form-{{ $equipment->eq_id }}">
                             @csrf
@@ -79,10 +87,24 @@
                                 <x-mdi-delete class="text-red-400 w-7 h-7" />
                             </button>
                         </form>
+                        @endif
+                        @endauth
                     </td>
                 </tr>
                 @endforeach
             </tbody>
+            @if($query && $totalStock->isNotEmpty())
+            <tfoot>
+                @foreach($totalStock as $total)
+                    <tr>
+                        <td><strong>Total for {{ $total->eq_name }}:</strong></td>
+
+                        <td><strong>{{ $total->total }}</strong></td>
+                        <td colspan="4"></td>
+                    </tr>
+                @endforeach
+            </tfoot>
+        @endif
         </table>
         {{ $equipments->links() }}
     </div>

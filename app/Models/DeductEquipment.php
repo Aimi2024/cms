@@ -17,5 +17,12 @@ class DeductEquipment extends Model
         'eqd_stock_deducted', // Stock deducted
         'eq_da',              // Equipment arrival date
         'eqd_date_deducted',  // Date when deduction occurred
+        'eq_deduc_reason',
+        'added_by',
     ];
+
+    public function addedBy()
+    {
+        return $this->belongsTo(User::class, 'added_by');
+    }
 }

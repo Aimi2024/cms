@@ -7,8 +7,13 @@ use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\MedicineController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PDFController;
 Route::middleware('auth')->group(function () {
+
+    //pdf
+    Route::get('/download-pdf', [PDFController::class, 'generatePDF'])->name('download.pdf');
+
+    Route::get('/download-pdf_eq', [PDFController::class, 'generatePDF_eq'])->name(name: 'downloadeq.pdf');
 
     // Dashboard route
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
@@ -54,8 +59,8 @@ Route::middleware('guest')->group(function () {
     Route::post('/', [SessionController::class, 'store']);
 });
 
-    Route::middleware('guest')->group(function () {
-        Route::get('/', [SessionController::class, 'create'])->name('login');
-        Route::post('/', [SessionController::class, 'store']);
+    // Route::middleware('guest')->group(function () {
+    //     Route::get('/', [SessionController::class, 'create'])->name('login');
+    //     Route::post('/', [SessionController::class, 'store']);
 
-    });
+    // });

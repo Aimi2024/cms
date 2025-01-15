@@ -14,16 +14,35 @@ class DeductedMedicineController extends Controller
     {
         $query = $request->input('query');
 
-        $medicinededucted = DeductedMedicine::when($query, function ($queryBuilder) use ($query) {
-            return $queryBuilder->where('medicine_name', 'like', '%' . $query . '%')
-                                 ->orWhere('created_at', 'like', '%' . $query . '%')
-                                 ->orWhere('quantity_deducted', 'like', '%' . $query . '%')
-                                 ->orWhere('deducted_at', 'like', '%' . $query . '%');
-        })
-        ->paginate(5);  // Pagination with 5 records per page
+        // Base query to fetch paginated results
+        $medicinededucted = DeductedMedicine::with('addedBy')
+            ->when($query, function ($queryBuilder) use ($query) {
+                return $queryBuilder->where('medicine_name', 'like', '%' . $query . '%')
+                    ->orWhere('created_at', 'like', '%' . $query . '%')
+                    ->orWhere('quantity_deducted', 'like', '%' . $query . '%')
+                    ->orWhereHas('addedBy', function ($q) use ($query) {
+                        $q->where('username', 'like', '%' . $query . '%');
+                    })
+                    ->orWhere('medicine_deduct_reason', 'like', '%' . $query . '%')
+                    ->orWhere('deducted_at', 'like', '%' . $query . '%');
+            })
+            ->paginate(5);
 
-        return view('medicine.deducted-table-medicine', compact('medicinededucted'));
+        // Initialize empty collection for total deduction
+        $totalDeducted = collect();
+
+        // Only calculate total if there is a search query
+        if ($query) {
+            $totalDeducted = DeductedMedicine::where('medicine_name', 'like', '%' . $query . '%')
+                ->selectRaw('sum(quantity_deducted) as total, medicine_name, count(*) as count')
+                ->groupBy('medicine_name')
+                ->having('count', '>', 1)
+                ->get();
+        }
+
+        return view('medicine.deducted-table-medicine', compact('medicinededucted', 'totalDeducted', 'query'));
     }
+
 
 
 

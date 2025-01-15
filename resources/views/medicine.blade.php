@@ -15,11 +15,14 @@
                 class="border border-[#707070] py-1 px-3 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300 rounded-2xl">
                 Deducted Medicine
             </a>
-
+            @auth
+            @if(auth()->user()->type === 'admin')
             <a href="{{ route('medicine.add') }}"
                 class="border border-[#707070] w-8 h-8 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300 rounded-lg flex justify-center items-center">
                 <x-typ-plus class="w-6 h-6" />
             </a>
+            @endif
+            @endauth
         </div>
 
         <!-- Search & Filter Section -->
@@ -43,6 +46,7 @@
                     <th>Name</th>
                     <th>Date Added</th>
                     <th>Stock</th>
+                    <th>Added</th>
                     <th>Expiration Date</th>
                     <th>Actions</th>
                 </tr>
@@ -62,6 +66,7 @@
                     class="px-4 py-2 @if($medicine->m_stock == 0) line-through decoration-red-500 text-red-500 @elseif($medicine->isExpired()) text-red-500 @endif">
                     {{ $medicine->m_stock }}
                 </td>
+                <td>{{ $medicine->added_by ? $medicine->addedBy->username : 'N/A' }}</td>
                 <td
                     class="px-4 py-2 @if($medicine->m_stock == 0) line-through decoration-red-500 text-red-500 @elseif($medicine->isExpired()) text-red-500 @endif">
                     {{ $medicine->m_date_expired }}
@@ -71,7 +76,8 @@
                         <a href="{{ route('medicine.deductshow', $medicine->m_id) }}" class="inline-block">
                             <x-mdi-minus-box-outline class="text-red-400 w-7 h-7" />
                         </a>
-
+                        @auth
+                        @if(auth()->user()->type === 'admin')
                         <!-- Delete Medicine Action -->
                         <form action="{{ route('medicine.destroy', $medicine->m_id) }}" method="POST"
                             class="inline-block ml-2" id="delete-form-{{ $medicine->m_id }}">
@@ -82,10 +88,24 @@
                                 <x-mdi-delete class="w-7 h-7" />
                             </button>
                         </form>
+                        @endif
+                        @endauth
                     </td>
                 </tr>
                 @endforeach
             </tbody>
+            @if($query && $totalStock->isNotEmpty())
+        <tfoot>
+            @foreach($totalStock as $total)
+                <tr>
+                    <td><strong>Total for {{ $total->m_name }}:</strong></td>
+                    <td colspan="1"></td>
+                    <td><strong>{{ $total->total }}</strong></td>
+                    <td colspan="4"></td>
+                </tr>
+            @endforeach
+        </tfoot>
+    @endif
         </table>
 
         <!-- Pagination Links -->

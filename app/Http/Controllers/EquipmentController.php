@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\Equipment;
 use Illuminate\Http\Request;
 
@@ -16,22 +16,43 @@ class EquipmentController extends Controller
         $dateTo = $request->input('date_to');
 
         // Fetch equipments with optional search query and date range
-        $equipments = Equipment::when($query, function($queryBuilder) use ($query) {
-            return $queryBuilder->where('eq_name', 'like', "%$query%")
-                ->orWhere('eq_id', 'like', "%$query%")  // Example of another search field, adjust as needed
-                ->orWhere('stock', 'like', "%$query%")  // Search by stock
-                ->orWhere('service_life_end', 'like', "%$query%"); // Include service_life_end in search
-        })
-        ->when($dateFrom, function($queryBuilder) use ($dateFrom) {
-            return $queryBuilder->where('eq_da', '>=', $dateFrom);
-        })
-        ->when($dateTo, function($queryBuilder) use ($dateTo) {
-            return $queryBuilder->where('eq_da', '<=', $dateTo);
-        })
-        ->paginate(10);  // Paginate the results
+        $equipments = Equipment::join('users', 'equipment.added_by', '=', 'users.id')
+            ->when($query, function ($queryBuilder) use ($query) {
+                return $queryBuilder->where('eq_name', 'LIKE', "%{$query}%")
+                    ->orWhere('eq_id', 'LIKE', "%{$query}%")
+                    ->orWhere('stock', 'LIKE', "%{$query}%")
+                    ->orWhere('service_life_end', 'LIKE', "%{$query}%")
+                    ->orWhere('users.username', 'LIKE', "%{$query}%");
+            })
+            ->when($dateFrom, function ($queryBuilder) use ($dateFrom) {
+                return $queryBuilder->where('eq_da', '>=', $dateFrom);
+            })
+            ->when($dateTo, function ($queryBuilder) use ($dateTo) {
+                return $queryBuilder->where('eq_da', '<=', $dateTo);
+            })
+            ->select('equipment.*', 'users.username') // Select necessary fields
+            ->paginate(10);
 
-        return view('equipments', compact('equipments'));
+        // Initialize empty collection for total stock calculation
+        $totalStock = collect();
+
+        // Perform total calculation if a search query exists
+        if ($query) {
+            $totalStock = Equipment::where('eq_name', 'like', "%{$query}%")
+                ->selectRaw('sum(stock) as total, eq_name, count(*) as count')
+                ->groupBy('eq_name')
+                ->having('count', '>', 1)
+                ->get();
+        }
+
+        return view('equipments', [
+            'equipments' => $equipments,
+            'totalStock' => $totalStock,
+            'query' => $query,
+        ]);
     }
+
+
 
 
     /**
@@ -62,6 +83,7 @@ class EquipmentController extends Controller
             'stock' => $request->stock,
             'eq_da' => $request->eq_da,  // Store the equipment arrival date
             'service_life_end' => $request->service_life_end,  // Store service life end if provided
+            'added_by' => Auth::id()
         ]);
 
         // Redirect with a success message
@@ -87,6 +109,7 @@ class EquipmentController extends Controller
         // Validate the deduction amount
         $request->validate([
             'deduct_stock' => 'required|integer|min:1|max:' . $equipment->stock,  // Validate deduction amount
+            'deduct_reason'=> 'required',
         ]);
 
         // Deduct stock and save changes
@@ -100,6 +123,8 @@ class EquipmentController extends Controller
             'eqd_stock_deducted' => $request->deduct_stock,
             'eq_da' => $equipment->eq_da,  // Assuming 'eq_da' is the field for the equipment's arrival date
             'eqd_date_deducted' => now(), // Current timestamp for when the deduction occurred
+            'eq_deduc_reason' => $request->deduct_reason,
+        'added_by' => Auth::id(),
         ]);
 
         // Redirect with success message

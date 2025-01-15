@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\Medicine;
 use Illuminate\Http\Request;
 
@@ -12,20 +12,37 @@ class MedicineController extends Controller
     {
         $query = $request->input('query');
 
+        // Base query for paginated medicine results
+        $medicines = Medicine::join('users', 'medicines.added_by', '=', 'users.id')
+            ->when($query, function ($queryBuilder) use ($query) {
+                return $queryBuilder->where('m_name', 'LIKE', "%{$query}%")
+                    ->orWhere('m_da', 'LIKE', "%{$query}%")
+                    ->orWhere('m_stock', 'LIKE', "%{$query}%")
+                    ->orWhere('users.username', 'LIKE', "%{$query}%")
+                    ->orWhere('m_date_expired', 'LIKE', "%{$query}%");
+            })
+            ->select('medicines.*', 'users.username')
+            ->paginate(5);
+
+        // Initialize empty collection for total stock calculation
+        $totalStock = collect();
+
+        // Perform total calculation if a search query exists
         if ($query) {
-            // Perform search if query is provided, now including m_name, m_da, m_stock, and m_date_expired
-            $medicines = Medicine::where('m_name', 'LIKE', "%{$query}%")
-                ->orWhere('m_da', 'LIKE', "%{$query}%")
-                ->orWhere('m_stock', 'LIKE', "%{$query}%")
-                ->orWhere('m_date_expired', 'LIKE', "%{$query}%")
-                ->paginate(5);
-        } else {
-            // Show all medicines by default
-            $medicines = Medicine::latest()->paginate(5);
+            $totalStock = Medicine::where('m_name', 'like', "%{$query}%")
+                ->selectRaw('sum(m_stock) as total, m_name, count(*) as count')
+                ->groupBy('m_name')
+                ->having('count', '>', 1)
+                ->get();
         }
 
-        return view('medicine', ['medicines' => $medicines]);
+        return view('medicine', [
+            'medicines' => $medicines,
+            'totalStock' => $totalStock,
+            'query' => $query,
+        ]);
     }
+
 
     // Show add-medicine form
     public function index()
@@ -42,6 +59,8 @@ class MedicineController extends Controller
             'm_stock' => ['required'],
             'm_date_expired' => ['required'],
         ]);
+
+        $medicineValidate['added_by'] = Auth::id();
 
         // Create the medicine record
         $medicine = Medicine::create($medicineValidate);
@@ -68,6 +87,7 @@ class MedicineController extends Controller
 
         $request->validate([
             'deduct_quantity' => 'required|integer|min:1|max:' . $medicine->m_stock,
+            'deduct_reason'=> 'required',
         ]);
 
         // Deduct from the medicine stock
@@ -76,13 +96,16 @@ class MedicineController extends Controller
         $medicine->m_da;
         $medicine->save();
 
+
+
         // Create a new entry in the DeductedMedicine table
         \App\Models\DeductedMedicine::create([
             'medicine_name' => $medicine->m_name,
             'quantity_deducted' => $request->deduct_quantity,
             'deducted_at' => now(), // Current timestamp
-            'created_at' =>$medicine->m_da
-
+            'created_at' =>$medicine->m_da,
+            'medicine_deduct_reason' => $request->deduct_reason,
+            'added_by' => Auth::id(),
         ]);
 
         return redirect()->route('medicine.index')

@@ -16,6 +16,6 @@ class AdminMiddleware
         }
 
         // Redirect to home or any other route if the user is not an admin
-        return redirect()->route(route: 'dashboard.index');
+        return redirect()->route(route: 'login');
     }
 }

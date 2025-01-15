@@ -17,6 +17,8 @@ return new class extends Migration
             $table->date('m_da');
             $table->integer('m_stock')->nullable();
             $table->date('m_date_expired');
+            $table->unsignedBigInteger('added_by')->nullable(); // Add the 'added_by' column
+            $table->foreign('added_by')->references('id')->on('users')->onDelete('set null'); // Foreign key to 'users' table
             $table->timestamps();
         });
     }

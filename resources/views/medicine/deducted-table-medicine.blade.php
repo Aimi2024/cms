@@ -1,12 +1,20 @@
 <x-layout>
     <div class="w-full h-dvh flex flex-col px-10 py-8 gap-5">
+        @auth
+        @if(auth()->user()->type === 'admin')
         <div class="w-full h-20 flex flex-row items-center justify-end pr-10">
+            <a href="{{ route('download.pdf') }}"  {{-- Update route to your PDF download route --}}
+            class="border border-[#707070] w-8 h-8 m-2 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300 rounded-lg flex justify-center items-center">
+            <x-typ-download class="w-6 h-6" />  {{-- Download icon --}}
+        </a>
             <a href="{{ route('medicine.add') }}"
                 class="border border-[#707070] w-8 h-8 text-[#FD7E14] hover:bg-[#FD7E14] hover:text-white hover:border-none transition duration-300 rounded-lg flex justify-center items-center">
                 <x-typ-plus class="w-6 h-6" />
             </a>
-        </div>
 
+        </div>
+   @endif
+                @endauth
         <!-- Flash Message Notification -->
         @if (session('success'))
             <script>
@@ -38,9 +46,7 @@
                     <x-css-search />
                 </button>
             </form>
-            <button class="transition-all duration-300 bg-[#FD7E14] rounded-lg py-1 px-4 text-white hover:bg-white hover:text-black hover:border hover:border-[#707070]">
-                Apply filter
-            </button>
+
         </div>
 
         <table class="text-center">
@@ -48,9 +54,15 @@
                 <tr>
                     <th>Name</th>
                     <th>Date Added</th>
-                    <th>Stock</th>
+                    <th>Stock Deducted</th>
+                    <th> Deducted By</th>
+                    <th>Reason</th>
                     <th>Deducted Date</th>
+                    @auth
+                    @if(auth()->user()->type === 'admin')
                     <th>Actions</th>
+                    @endif
+                    @endauth
                 </tr>
             </thead>
             <tbody>
@@ -59,7 +71,13 @@
                     <td>{{ $medicine->medicine_name }}</td>
                     <td>{{ $medicine->created_at }}</td>
                     <td>{{ $medicine->quantity_deducted }}</td>
+                    <td>{{ $medicine->addedBy->username ?? 'N/A' }}</td>
+                    <td>{{ $medicine->medicine_deduct_reason}}</td>
+
                     <td>{{ $medicine->deducted_at }}</td>
+
+                    @auth
+                    @if(auth()->user()->type === 'admin')
                     <td class="relative">
                         <form id="delete-form-{{ $medicine->id }}" action="{{ route('medicine.delete', ['deductedMedicine' => $medicine->id]) }}" method="POST" class="inline">
                             @csrf
@@ -69,9 +87,24 @@
                             </button>
                         </form>
                     </td>
+                    @endif
+                    @endauth
                 </tr>
                 @endforeach
+
             </tbody>
+            <tfoot>
+                @if($totalDeducted->isNotEmpty())
+            @foreach($totalDeducted as $total)
+                <tr>
+                    <td></td>
+                    <td><strong>Total for {{ $total->medicine_name }}:</strong></td>
+                    <td><strong>{{ $total->total }}</strong></td>
+                    <td colspan="3"></td>
+                </tr>
+            @endforeach
+        @endif
+            </tfoot>
         </table>
 
         <!-- Pagination Links -->

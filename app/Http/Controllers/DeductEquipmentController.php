@@ -12,17 +12,36 @@ class DeductEquipmentController extends Controller
     {
         $query = $request->input('query');
 
-        $equipmentdeducted = DeductEquipment::when($query, function ($queryBuilder) use ($query) {
-            return $queryBuilder->where('eqd_name', 'like', '%' . $query . '%')
-                                 ->orWhere('created_at', 'like', '%' . $query . '%')
-                                 ->orWhere('eqd_stock_deducted', 'like', '%' . $query . '%')
-                                 ->orWhere('eq_da', 'like', '%' . $query . '%')
-                                 ->orWhere('eqd_date_deducted', 'like', '%' . $query . '%');
-        })
-        ->paginate(5);  // Pagination with 5 records per page
+        // Base query to fetch paginated results
+        $equipmentdeducted = DeductEquipment::with('addedBy')
+            ->when($query, function ($queryBuilder) use ($query) {
+                return $queryBuilder->where('eqd_name', 'like', '%' . $query . '%')
+                    ->orWhere('created_at', 'like', '%' . $query . '%')
+                    ->orWhere('eqd_stock_deducted', 'like', '%' . $query . '%')
+                    ->orWhere('eq_da', 'like', '%' . $query . '%')
+                    ->orWhere('eq_deduc_reason', 'like', '%' . $query . '%')
+                    ->orWhere('eqd_date_deducted', 'like', '%' . $query . '%')
+                    ->orWhereHas('addedBy', function ($q) use ($query) {
+                        $q->where('username', 'like', '%' . $query . '%');
+                    });
+            })
+            ->paginate(5);
 
-        return view('equipments.eq-deducted-table', compact('equipmentdeducted'));
+        // Initialize empty collection for total deduction
+        $totalDeducted = collect();
+
+        // Only calculate total if there is a search query
+        if ($query) {
+            $totalDeducted = DeductEquipment::where('eqd_name', 'like', '%' . $query . '%')
+                ->selectRaw('sum(eqd_stock_deducted) as total, eqd_name, count(*) as count')
+                ->groupBy('eqd_name')
+                ->having('count', '>', 1)
+                ->get();
+        }
+
+        return view('equipments.eq-deducted-table', compact('equipmentdeducted', 'totalDeducted', 'query'));
     }
+
 
     /**
      * Show the form for creating a new resource.

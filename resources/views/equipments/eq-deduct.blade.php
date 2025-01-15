@@ -38,6 +38,11 @@
                 <input id="deduct_quantity" name="deduct_stock" type="number"
                     class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
             </div>
+            <div class="flex flex-col gap-1">
+                <label for="deduct_reason" class="font-bold">Reason</label>
+                <input id="deduct_reason" name="deduct_reason" type="text"
+                    class="outline-none px-3 py-2 border border-[#707070] rounded-lg">
+            </div>
 
             <div class="flex flex-row gap-5 mt-7 sm:col-start-2">
                 <a href="{{ route('equipment.index') }}"
